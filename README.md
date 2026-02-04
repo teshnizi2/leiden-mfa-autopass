@@ -105,7 +105,7 @@ Follow these steps once. After that, visiting a Leiden login page will complete 
 
 2. A **6-digit code** will appear below and update every 30 seconds.
 
-   ![TOTP code](docs/screenshots/image6.jpg)
+   ![TOTP code](docs/screenshots/image5.jpg)
 
 3. If Leiden is still asking for a code to finish enrollment: switch to the Leiden tab, enter the 6-digit code from the extension, and click **Next**.
 
