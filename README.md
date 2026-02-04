@@ -34,7 +34,7 @@ Follow these steps once. After that, visiting a Leiden login page will complete 
 
 1. On this page, click the green **Code** button, then **Download ZIP**.
 
-   ![Download ZIP](docs/screenshots/image5.jpg)
+   ![Download ZIP](docs/screenshots/image6.jpg)
 
 2. Unzip the file on your computer:
    - **Mac:** Double-click the ZIP file.
