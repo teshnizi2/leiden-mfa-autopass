@@ -2,6 +2,20 @@
 
 All notable changes to the Leiden MFA Auto-Pass extension.
 
+## [2.0.2] - 2026-02-04
+
+### Added
+- ✨ **Live TOTP code display** in settings page - see your 6-digit codes in real-time
+- 🔄 Auto-updating code display with countdown timer and progress bar
+- 🎨 Beautiful gradient UI for code display
+
+### Removed
+- 🗑️ Removed separate test-totp.html page (functionality now integrated in settings)
+
+### Improved
+- 🎯 Better UX - users can verify their codes directly in settings
+- ⚡ Instant feedback when entering secret key
+
 ## [2.0.1] - 2026-02-04
 
 ### Fixed

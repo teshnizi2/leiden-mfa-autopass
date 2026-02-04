@@ -118,13 +118,14 @@ If you can't find your secret:
 
 ## 🧪 Test Your Secret
 
-Use the built-in test page:
+The extension settings page includes a live TOTP code display:
 
-1. Find where you installed the extension
-2. Open the file: `extension/test-totp.html` in Edge
-3. It will load your secret and generate codes
-4. Compare with your authenticator app
-5. **The codes should match!**
+1. Open the extension options page
+2. Enter your TOTP secret key
+3. A live 6-digit code will appear below the input field
+4. The code updates every 30 seconds automatically
+5. Compare with your authenticator app
+6. **The codes should match!**
 
 If they don't match, your secret is wrong.
 

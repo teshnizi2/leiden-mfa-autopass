@@ -53,6 +53,7 @@ The extension automatically handles all three steps:
 3. **Configure:**
    - Click "Extension options"
    - Enter your TOTP secret key (see setup guide below)
+   - You'll see a live 6-digit code appear - verify it matches your authenticator app
    - (Optional) Enable auto-fill for username/password
    - Click "Save Settings"
 
@@ -86,13 +87,13 @@ The secret looks like: `JBSWY3DPEHPK3PXPJBSWY3DP` (16-32 uppercase characters)
 
 ## 🧪 Testing Your Setup
 
-Open the built-in test page to verify your TOTP codes:
+Verify your TOTP codes directly in the extension settings:
 
-1. Go to `edge://extensions/`
-2. Find the extension folder location
-3. Open `test-totp.html` in your browser
-4. Compare the generated code with your authenticator app
-5. They should match!
+1. Open extension settings (Extension options)
+2. Enter your TOTP secret key
+3. A live 6-digit code will appear below the secret field
+4. The code updates every 30 seconds automatically
+5. Compare with your authenticator app - they should match!
 
 ## 📖 How It Works
 
