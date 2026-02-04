@@ -125,7 +125,6 @@ async function updateTOTPDisplay(secret) {
 document.addEventListener('DOMContentLoaded', () => {
   const totpSecretGroup = document.getElementById('totpSecretGroup');
   const credentialsGroup = document.getElementById('credentialsGroup');
-  const secretDetectionInfo = document.getElementById('secretDetectionInfo');
   const autoFillCredentialsCheckbox = document.getElementById('autoFillCredentials');
   
   // Toggle credentials fields
@@ -164,17 +163,6 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('totpSecret').value = result.totpSecret;
       // Show live TOTP code
       updateTOTPDisplay(result.totpSecret);
-    }
-    
-    // Show secret detection info if secret was detected
-    if (result.secretDetected && result.totpSecret) {
-      secretDetectionInfo.style.display = 'block';
-      const infoDiv = secretDetectionInfo.querySelector('.description');
-      infoDiv.innerHTML = '<strong>✅ Secret Key Detected and Saved!</strong><br><br>' +
-        'Your secret key was automatically detected and saved. The extension is ready for fully automated login.<br><br>' +
-        '<strong>Secret Key:</strong> <code>' + result.totpSecret.substring(0, 8) + '...</code>';
-    } else {
-      secretDetectionInfo.style.display = 'block';
     }
     
     toggleCredentialsFields();
