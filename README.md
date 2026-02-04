@@ -52,8 +52,9 @@ The extension automatically handles all three steps:
 
 3. **Configure:**
    - Click "Extension options"
-   - Enter your TOTP secret key (see setup guide below)
-   - You'll see a live 6-digit code appear - verify it matches your authenticator app
+   - Get your TOTP secret key from Leiden ([Visual Guide](VISUAL_SETUP_GUIDE.md))
+   - Paste the secret key in the settings
+   - You'll see a live 6-digit code appear in a purple box! ✨
    - (Optional) Enable auto-fill for username/password
    - Click "Save Settings"
 
@@ -61,29 +62,35 @@ The extension automatically handles all three steps:
    - Go to https://login.leidenuniv.nl/
    - The extension will automatically handle the 2FA!
 
-## 🔑 Finding Your TOTP Secret Key
+## 🔑 Getting Your TOTP Secret Key
 
-You need the **secret key** from when you set up 2FA with Leiden.
+### 📸 **[Complete Visual Guide with Screenshots →](VISUAL_SETUP_GUIDE.md)**
 
-### Option 1: From authenticator app
+**Quick Steps:**
 
-**Google Authenticator:**
-1. Open app → Tap 3 dots → "Transfer accounts" → "Export accounts"
-2. Select Leiden University
-3. Take screenshot of QR code
-4. Use QR code reader to decode and extract the secret
+1. **Go to Leiden Identity Manager:**
+   - Visit: https://account.services.universiteitleiden.nl/idmdash/#/landing
+   - Navigate to **"Multi-Factor Authentication"** section
 
-**Other apps:** Most don't show the secret directly.
+2. **Select TOTP Non-NetIQ Authenticator:**
+   - Click **"Enroll"** or **"Modify"**
+   - You'll see your secret key page
 
-### Option 2: Re-register 2FA
+3. **Copy the Secret Key:**
+   - Copy the long string of letters and numbers
+   - This is your TOTP secret
 
-1. Contact Leiden IT support or go to https://password.leidenuniv.nl/
-2. Register a new authenticator: "Code from non-NetIQ Authenticator"
-3. When you see the QR code, **copy the text below it** (the secret)
-4. Paste that secret into the extension settings
-5. Also scan the QR with your authenticator app
+4. **Paste into Extension:**
+   - Open extension settings
+   - Paste into "TOTP Secret Key" field
+   - A 6-digit code will appear in the purple box!
 
-The secret looks like: `JBSWY3DPEHPK3PXPJBSWY3DP` (16-32 uppercase characters)
+5. **Complete Setup:**
+   - Use the 6-digit code to finish enrollment
+   - Click "Save Settings"
+   - Done! 🎉
+
+**The secret looks like:** `JBSWY3DPEHPK3PXPJBSWY3DP` (16-32 uppercase characters)
 
 ## 🧪 Testing Your Setup
 
@@ -94,6 +101,20 @@ Verify your TOTP codes directly in the extension settings:
 3. A live 6-digit code will appear below the secret field
 4. The code updates every 30 seconds automatically
 5. Compare with your authenticator app - they should match!
+
+## 📸 Screenshots
+
+### Extension Settings Page
+![Settings Page](docs/screenshots/image4.jpg)
+*Beautiful, modern interface with live TOTP code display*
+
+### Getting Your Secret Key
+![Secret Key](docs/screenshots/image3.jpg)
+*Copy your secret key from Leiden's Identity Manager*
+
+**[See Complete Visual Setup Guide →](VISUAL_SETUP_GUIDE.md)**
+
+---
 
 ## 📖 How It Works
 

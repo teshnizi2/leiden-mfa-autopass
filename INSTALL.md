@@ -75,57 +75,82 @@ Works with all Chromium browsers: Edge, Chrome, Brave, Opera, Vivaldi, Arc
 3. **Verify:**
    - You should be logged in automatically!
 
-## 🔑 How to Find Your TOTP Secret
+## 🔑 How to Get Your TOTP Secret Key
 
-You need the secret key from your 2FA setup. Here are the ways to get it:
+### 📸 **[Complete Visual Guide with Screenshots →](VISUAL_SETUP_GUIDE.md)**
 
-### Method 1: From Google Authenticator
+**Step-by-step with images showing exactly what to do!**
+
+---
+
+### Quick Text Guide:
+
+1. **Go to Leiden Identity Manager:**
+   ```
+   https://account.services.universiteitleiden.nl/idmdash/#/landing
+   ```
+
+2. **Navigate to Multi-Factor Authentication:**
+   - Find the "Multi-Factor Authentication" section
+   - Click on it
+
+3. **Select TOTP Non-NetIQ Authenticator:**
+   - Look for "TOTP Non-NetIQ Authenticator"
+   - Click **"Enroll"** (first time) or **"Modify"** (existing)
+
+4. **Copy Your Secret Key:**
+   - You'll see a page with your secret key
+   - It's a long string like: `JBSWY3DPEHPK3PXPJBSWY3DP`
+   - **Copy the entire key**
+
+5. **Paste into Extension:**
+   - Open extension settings
+   - Paste into "TOTP Secret Key" field
+   - A 6-digit code will appear in a purple box!
+
+6. **Complete Enrollment:**
+   - Use the generated 6-digit code to verify
+   - Click "Next" on the Leiden page
+   - Click "Save Settings" in the extension
+
+**Done!** 🎉
+
+---
+
+### Alternative Methods:
+
+#### Method 1: From Google Authenticator
 
 1. Open Google Authenticator
-2. Tap the **3 dots** (⋮) menu → "Transfer accounts" → "Export accounts"
-3. Select "Leiden University"
-4. Screenshot the QR code shown
-5. Use an online QR code decoder (Google "QR code decoder")
-6. Upload your screenshot
-7. Look for text like: `otpauth://totp/...?secret=XXXXX`
-8. Copy the `XXXXX` part (that's your secret)
+2. Tap the **3 dots** → "Transfer accounts" → "Export accounts"
+3. Screenshot the QR code
+4. Use a QR code decoder to extract the secret
 
-### Method 2: From Your Records
+#### Method 2: From Your Records
 
-When you set up 2FA, Leiden showed you:
-- A QR code to scan
-- Text below it (the secret key)
-
-Check if you:
-- Saved it in your password manager
-- Wrote it down
-- Took a screenshot
-- Saved it in notes
-
-### Method 3: Register New Authenticator
-
-If you can't find your secret:
-
-1. **Go to:** https://password.leidenuniv.nl/ (or contact IT support)
-2. **Register new method:** "Code from non-NetIQ Authenticator"
-3. **When you see the QR code:**
-   - **COPY the text below the QR code** (this is your secret!)
-   - Paste it into the extension settings
-   - Also scan the QR with your authenticator app
-4. **Save both** (app and extension now have the same secret)
+Check if you saved it when setting up 2FA:
+- Password manager
+- Notes app
+- Screenshot
+- Written down
 
 **Important:** You can have multiple authenticators registered!
 
 ## 🧪 Test Your Secret
 
-The extension settings page includes a live TOTP code display:
+The extension settings page includes a **beautiful live TOTP code display**:
 
 1. Open the extension options page
 2. Enter your TOTP secret key
-3. A live 6-digit code will appear below the input field
-4. The code updates every 30 seconds automatically
+3. **A live 6-digit code appears in a purple gradient box!** ✨
+4. The code updates every 30 seconds with:
+   - 📊 **Progress bar** showing time remaining
+   - ⏱️ **Countdown timer**
+   - 🔢 **Large, easy-to-read code**
 5. Compare with your authenticator app
 6. **The codes should match!**
+
+![TOTP Display](docs/screenshots/image5.jpg)
 
 If they don't match, your secret is wrong.
 
