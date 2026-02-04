@@ -24,7 +24,7 @@
 
   // Configuration
   let config = {
-    enabled: true,
+    enabled: false,
     autoAdvance: true,
     autoFillCode: true,
     autoFillCredentials: false,

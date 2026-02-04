@@ -143,6 +143,8 @@ document.addEventListener('DOMContentLoaded', () => {
   chrome.storage.sync.get(['enabled', 'autoAdvance', 'autoFillCode', 'autoFillCredentials', 'username', 'password', 'totpSecret', 'secretDetected'], (result) => {
     if (result.enabled !== undefined) {
       document.getElementById('enabled').checked = result.enabled;
+    } else {
+      document.getElementById('enabled').checked = false;
     }
     if (result.autoAdvance !== undefined) {
       document.getElementById('autoAdvance').checked = result.autoAdvance;

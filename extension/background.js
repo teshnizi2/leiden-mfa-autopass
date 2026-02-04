@@ -8,7 +8,7 @@ chrome.runtime.onInstalled.addListener((details) => {
   if (details.reason === 'install') {
     // Set default preferences
     chrome.storage.sync.set({
-      enabled: true,
+      enabled: false,
       autoAdvance: true,
       autoFillCode: true
     });

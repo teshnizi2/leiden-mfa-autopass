@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function updateStatus() {
   chrome.storage.sync.get(['enabled'], (result) => {
-    const enabled = result.enabled !== false; // Default to true
+    const enabled = result.enabled === true; // Default false until user enables
     const statusValue = document.getElementById('statusValue');
     const statusIndicator = document.getElementById('statusIndicator');
     const toggleBtn = document.getElementById('toggleBtn');
@@ -42,7 +42,7 @@ function toggleEnabled() {
   toggleBtn.style.opacity = '0.6';
   
   chrome.storage.sync.get(['enabled'], (result) => {
-    const newValue = !(result.enabled !== false);
+    const newValue = !(result.enabled === true);
     chrome.storage.sync.set({ enabled: newValue }, () => {
       updateStatus();
       
