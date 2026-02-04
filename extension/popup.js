@@ -12,26 +12,45 @@ document.addEventListener('DOMContentLoaded', () => {
 function updateStatus() {
   chrome.storage.sync.get(['enabled'], (result) => {
     const enabled = result.enabled !== false; // Default to true
-    const statusDiv = document.getElementById('status');
+    const statusValue = document.getElementById('statusValue');
+    const statusIndicator = document.getElementById('statusIndicator');
     const toggleBtn = document.getElementById('toggleBtn');
+    const toggleIcon = document.getElementById('toggleIcon');
+    const toggleText = document.getElementById('toggleText');
     
     if (enabled) {
-      statusDiv.textContent = 'Automation is ENABLED';
-      statusDiv.className = 'status enabled';
-      toggleBtn.textContent = 'Disable';
+      statusValue.textContent = 'Active';
+      statusValue.className = 'status-value enabled';
+      statusIndicator.className = 'status-indicator enabled';
+      toggleIcon.textContent = '⏸️';
+      toggleText.textContent = 'Disable';
     } else {
-      statusDiv.textContent = 'Automation is DISABLED';
-      statusDiv.className = 'status disabled';
-      toggleBtn.textContent = 'Enable';
+      statusValue.textContent = 'Disabled';
+      statusValue.className = 'status-value disabled';
+      statusIndicator.className = 'status-indicator disabled';
+      toggleIcon.textContent = '▶️';
+      toggleText.textContent = 'Enable';
     }
   });
 }
 
 function toggleEnabled() {
+  const toggleBtn = document.getElementById('toggleBtn');
+  
+  // Disable button temporarily to prevent double-clicks
+  toggleBtn.disabled = true;
+  toggleBtn.style.opacity = '0.6';
+  
   chrome.storage.sync.get(['enabled'], (result) => {
     const newValue = !(result.enabled !== false);
     chrome.storage.sync.set({ enabled: newValue }, () => {
       updateStatus();
+      
+      // Re-enable button
+      setTimeout(() => {
+        toggleBtn.disabled = false;
+        toggleBtn.style.opacity = '1';
+      }, 300);
       
       // Reload MFA pages to apply changes
       chrome.tabs.query({ url: 'https://mfa.services.universiteitleiden.nl/*' }, (tabs) => {

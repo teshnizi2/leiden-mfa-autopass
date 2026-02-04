@@ -2,6 +2,26 @@
 
 All notable changes to the Leiden MFA Auto-Pass extension.
 
+## [2.0.3] - 2026-02-04
+
+### Improved
+- 🎨 **Complete UI/UX redesign** - Beautiful, modern, professional interface
+- ✨ **Settings page redesign**:
+  - Stunning gradient backgrounds and animations
+  - Card-based layout with hover effects
+  - Beautiful TOTP code display with gradient background
+  - Improved typography and spacing
+  - Smooth animations and transitions
+- 🎯 **Popup redesign**:
+  - Modern, animated interface
+  - Status indicators with pulse animations
+  - Quick info section
+  - Better button designs
+  - Professional color scheme
+- 📱 **Better mobile/responsive design**
+- 🌈 **Enhanced visual hierarchy**
+- ⚡ **Smooth transitions and micro-interactions**
+
 ## [2.0.2] - 2026-02-04
 
 ### Added

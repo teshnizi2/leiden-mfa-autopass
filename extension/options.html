@@ -5,191 +5,447 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Leiden MFA Auto-Pass - Settings</title>
   <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      max-width: 600px;
-      margin: 40px auto;
-      padding: 20px;
-      background: #f5f5f5;
-    }
-    .container {
-      background: white;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    h1 {
-      color: #003d82;
-      margin-top: 0;
-      font-size: 24px;
-    }
-    .form-group {
-      margin-bottom: 25px;
-    }
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 500;
-      color: #333;
-    }
-    input[type="text"], input[type="password"], input[type="checkbox"] {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 14px;
+    * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
-    input[type="text"] {
-      font-family: monospace;
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+      line-height: 1.6;
     }
-    code {
-      background: #f5f5f5;
-      padding: 2px 6px;
-      border-radius: 3px;
-      font-size: 11px;
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      animation: fadeIn 0.5s ease-out;
     }
-    .checkbox-group {
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      color: white;
+    }
+    
+    .header h1 {
+      font-size: 42px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    
+    .header .subtitle {
+      font-size: 18px;
+      opacity: 0.95;
+      font-weight: 300;
+    }
+    
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 35px;
+      margin-bottom: 25px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+    }
+    
+    .card-title {
+      font-size: 22px;
+      font-weight: 600;
+      color: #2d3748;
+      margin-bottom: 20px;
       display: flex;
       align-items: center;
       gap: 10px;
     }
+    
+    .card-title .icon {
+      font-size: 28px;
+    }
+    
+    .form-group {
+      margin-bottom: 25px;
+    }
+    
+    label {
+      display: block;
+      font-weight: 500;
+      color: #4a5568;
+      margin-bottom: 10px;
+      font-size: 15px;
+    }
+    
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid #e2e8f0;
+      border-radius: 10px;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      font-family: 'Courier New', monospace;
+      background: #f7fafc;
+    }
+    
+    input[type="text"]:focus, input[type="password"]:focus {
+      outline: none;
+      border-color: #667eea;
+      background: white;
+      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+    }
+    
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      background: #f7fafc;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+    
+    .checkbox-group:hover {
+      background: #edf2f7;
+      border-color: #667eea;
+    }
+    
     .checkbox-group input[type="checkbox"] {
-      width: auto;
+      width: 20px;
+      height: 20px;
       cursor: pointer;
+      accent-color: #667eea;
     }
+    
+    .checkbox-group label {
+      margin: 0;
+      cursor: pointer;
+      flex: 1;
+      font-weight: 500;
+      color: #2d3748;
+    }
+    
     .description {
-      font-size: 12px;
-      color: #666;
-      margin-top: 5px;
+      font-size: 14px;
+      color: #718096;
+      margin-top: 8px;
+      line-height: 1.5;
     }
-    .save-button {
-      background: #003d82;
+    
+    .totp-display {
+      display: none;
+      margin-top: 20px;
+      padding: 30px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 12px;
+      text-align: center;
+      animation: slideDown 0.4s ease-out;
+    }
+    
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .totp-display .label {
+      color: rgba(255,255,255,0.9);
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .totp-display .code {
       color: white;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 4px;
-      font-size: 16px;
-      cursor: pointer;
+      font-size: 52px;
+      font-weight: 700;
+      letter-spacing: 12px;
+      font-family: 'Courier New', monospace;
+      text-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      margin-bottom: 20px;
+    }
+    
+    .totp-display .progress-bar {
+      height: 6px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+    
+    .totp-display .progress-fill {
+      height: 100%;
+      background: white;
+      border-radius: 3px;
+      transition: width 1s linear;
+      box-shadow: 0 0 10px rgba(255,255,255,0.5);
+    }
+    
+    .totp-display .timer {
+      color: rgba(255,255,255,0.95);
+      font-size: 14px;
       font-weight: 500;
     }
-    .save-button:hover {
-      background: #0052a3;
-    }
-    .status {
+    
+    .info-box {
+      background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
+      padding: 20px;
+      border-radius: 10px;
+      border-left: 4px solid #3b82f6;
       margin-top: 15px;
-      padding: 10px;
-      border-radius: 4px;
+    }
+    
+    .info-box strong {
+      display: block;
+      color: #1e40af;
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+    
+    .info-box ul {
+      margin-left: 20px;
+      color: #1e3a8a;
+    }
+    
+    .info-box li {
+      margin: 5px 0;
+      font-size: 14px;
+    }
+    
+    .success-box {
+      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+      border-left-color: #10b981;
+    }
+    
+    .success-box strong {
+      color: #065f46;
+    }
+    
+    .success-box ul {
+      color: #064e3b;
+    }
+    
+    .save-button {
+      width: 100%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 16px 32px;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .save-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    }
+    
+    .save-button:active {
+      transform: translateY(0);
+    }
+    
+    .status {
+      margin-top: 20px;
+      padding: 16px;
+      border-radius: 10px;
       display: none;
+      font-weight: 500;
+      animation: slideDown 0.3s ease-out;
     }
+    
     .status.success {
-      background: #d4edda;
-      color: #155724;
-      border: 1px solid #c3e6cb;
+      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+      color: #065f46;
+      border: 2px solid #10b981;
     }
+    
     .status.error {
-      background: #f8d7da;
-      color: #721c24;
-      border: 1px solid #f5c6cb;
+      background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+      color: #991b1b;
+      border: 2px solid #ef4444;
+    }
+    
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      color: white;
+      opacity: 0.9;
+      font-size: 14px;
+    }
+    
+    .footer a {
+      color: white;
+      text-decoration: underline;
+      font-weight: 500;
+    }
+    
+    /* Credentials section styling */
+    #credentialsGroup {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 2px dashed #e2e8f0;
+    }
+    
+    #credentialsGroup label {
+      margin-top: 15px;
+    }
+    
+    /* Smooth transitions */
+    * {
+      transition: background-color 0.3s ease;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Leiden MFA Auto-Pass Settings</h1>
-    <p style="color: #666; margin-bottom: 25px;">Fully automated authentication using TOTP codes</p>
+    <div class="header">
+      <h1>🔐 Leiden MFA Auto-Pass</h1>
+      <p class="subtitle">Fully automated two-factor authentication</p>
+    </div>
     
     <form id="settingsForm">
-      <div class="form-group">
-        <label>
+      <!-- General Settings -->
+      <div class="card">
+        <div class="card-title">
+          <span class="icon">⚙️</span>
+          General Settings
+        </div>
+        
+        <div class="form-group">
           <div class="checkbox-group">
             <input type="checkbox" id="enabled" checked>
-            <span>Enable automation</span>
+            <label for="enabled">Enable automation</label>
           </div>
-        </label>
-        <div class="description">Turn automation on or off</div>
-      </div>
+          <div class="description">Turn the extension on or off globally</div>
+        </div>
 
-      <div class="form-group">
-        <label>
+        <div class="form-group">
           <div class="checkbox-group">
             <input type="checkbox" id="autoAdvance" checked>
-            <span>Auto-advance after selection</span>
+            <label for="autoAdvance">Auto-advance through steps</label>
           </div>
-        </label>
-        <div class="description">Automatically click "Next" after selecting authentication method</div>
-      </div>
+          <div class="description">Automatically click "Next" buttons during authentication</div>
+        </div>
 
-      <div class="form-group">
-        <label>
+        <div class="form-group">
           <div class="checkbox-group">
             <input type="checkbox" id="autoFillCode" checked>
-            <span>Auto-fill and submit TOTP code</span>
+            <label for="autoFillCode">Auto-fill and submit TOTP code</label>
           </div>
-        </label>
-        <div class="description">Automatically generate, fill, and submit TOTP codes</div>
+          <div class="description">Automatically generate, fill, and submit authentication codes</div>
+        </div>
       </div>
 
-      <div class="form-group" id="totpSecretGroup">
-        <label for="totpSecret">TOTP Secret Key</label>
-        <input type="text" id="totpSecret" placeholder="Enter your base32 secret key (e.g., JBSWY3DPEHPK3PXP)" style="font-family: monospace;">
-        
-        <!-- Live TOTP Code Display -->
-        <div id="totpCodeDisplay" style="display: none; margin-top: 15px; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; text-align: center;">
-          <div style="color: white; font-size: 14px; margin-bottom: 10px; font-weight: 500;">Current TOTP Code:</div>
-          <div id="totpCode" style="color: white; font-size: 42px; font-weight: bold; letter-spacing: 8px; font-family: 'Courier New', monospace; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">------</div>
-          <div style="margin-top: 15px; height: 4px; background: rgba(255,255,255,0.3); border-radius: 2px; overflow: hidden;">
-            <div id="totpProgress" style="height: 100%; background: white; transition: width 1s linear; border-radius: 2px;"></div>
-          </div>
-          <div id="totpTimer" style="color: rgba(255,255,255,0.9); font-size: 12px; margin-top: 8px;">Refreshes in 30s</div>
+      <!-- TOTP Configuration -->
+      <div class="card">
+        <div class="card-title">
+          <span class="icon">🔑</span>
+          TOTP Configuration
         </div>
         
-        <div class="description" style="margin-top: 10px;">
-          <strong>How to get your secret key:</strong><br>
-          1. Visit Leiden Account Services → Multi-Factor Authentication<br>
-          2. Select "Non-NetIQ Authenticator" → Enroll/Modify<br>
-          3. Click the eye icon (👁️) to reveal the secret key<br>
-          4. The extension will auto-detect it, or you can manually paste it here<br>
-          <strong>Security:</strong> This is stored locally in your browser and never sent anywhere.
+        <div class="form-group" id="totpSecretGroup">
+          <label for="totpSecret">Secret Key</label>
+          <input type="text" id="totpSecret" placeholder="Enter your Base32 secret key (e.g., JBSWY3DPEHPK3PXP)">
+          
+          <!-- Live TOTP Code Display -->
+          <div id="totpCodeDisplay" class="totp-display">
+            <div class="label">Current TOTP Code</div>
+            <div id="totpCode" class="code">------</div>
+            <div class="progress-bar">
+              <div id="totpProgress" class="progress-fill"></div>
+            </div>
+            <div id="totpTimer" class="timer">Refreshes in 30s</div>
+          </div>
+          
+          <div class="info-box">
+            <strong>📋 How to get your secret key:</strong>
+            <ul>
+              <li>Go to Leiden Account Services → Multi-Factor Authentication</li>
+              <li>Select "Non-NetIQ Authenticator" → Enroll/Modify</li>
+              <li>Click the eye icon (👁️) to reveal the secret key</li>
+              <li>Copy and paste it here</li>
+            </ul>
+            <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(59, 130, 246, 0.3);">
+              <strong style="color: #1e40af;">🔒 Security:</strong>
+              <span style="color: #1e3a8a; font-size: 14px;">Stored locally in your browser, never sent anywhere</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group" id="secretDetectionInfo">
+          <div class="info-box success-box">
+            <strong>✨ Auto-Detection Active!</strong>
+            <ul>
+              <li>Visit the Leiden secret key setup page</li>
+              <li>Click the eye icon to reveal your secret</li>
+              <li>The extension will detect and save it automatically</li>
+              <li>No manual copying needed!</li>
+            </ul>
+          </div>
         </div>
       </div>
 
-      <div class="form-group" id="secretDetectionInfo">
-        <label>Secret Key Auto-Detection</label>
-        <div class="description" style="background: #d4edda; padding: 15px; border-radius: 4px; border-left: 4px solid #28a745;">
-          <strong>✅ Secret Key Auto-Detection Active!</strong><br><br>
-          When you visit the secret key setup page and click the eye icon, the extension will automatically:<br>
-          1. Detect the secret key from the page<br>
-          2. Save it automatically<br>
-          3. You'll see a notification confirming it was saved<br><br>
-          <strong>No manual copying needed!</strong> Just visit the setup page and the extension handles everything.
+      <!-- Login Credentials (Optional) -->
+      <div class="card">
+        <div class="card-title">
+          <span class="icon">👤</span>
+          Login Credentials (Optional)
         </div>
-      </div>
-
-      <div class="form-group">
-        <label>
+        
+        <div class="form-group">
           <div class="checkbox-group">
             <input type="checkbox" id="autoFillCredentials">
-            <span>Auto-fill login credentials (Optional)</span>
+            <label for="autoFillCredentials">Auto-fill username and password</label>
           </div>
-        </label>
-        <div class="description">Automatically fill username and password on login pages</div>
+          <div class="description">Automatically fill your credentials on the login page</div>
+        </div>
+
+        <div id="credentialsGroup" style="display: none;">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Your Leiden username">
+            <div class="description">Your Leiden University username</div>
+          </div>
+          
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Your password">
+            <div class="description">Your Leiden University password (stored locally, encrypted)</div>
+          </div>
+        </div>
       </div>
 
-      <div class="form-group" id="credentialsGroup" style="display: none;">
-        <label for="username">Username (Optional)</label>
-        <input type="text" id="username" placeholder="Your Leiden username">
-        <div class="description">Your Leiden University username (stored locally, encrypted)</div>
-        
-        <label for="password" style="margin-top: 15px;">Password (Optional)</label>
-        <input type="password" id="password" placeholder="Your password">
-        <div class="description">Your Leiden University password (stored locally, encrypted)</div>
-      </div>
-
-      <button type="submit" class="save-button">Save Settings</button>
+      <!-- Save Button -->
+      <button type="submit" class="save-button">💾 Save Settings</button>
     </form>
 
     <div id="status" class="status"></div>
+    
+    <div class="footer">
+      <p>Made with ❤️ for Leiden University</p>
+      <p><a href="https://github.com/teshnizi2/leiden-mfa-autopass" target="_blank">View on GitHub</a></p>
+    </div>
   </div>
 
   <script src="options.js"></script>

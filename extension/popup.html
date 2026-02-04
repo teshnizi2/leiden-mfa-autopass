@@ -5,61 +5,295 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Leiden MFA Auto-Pass</title>
   <style>
-    body {
-      width: 300px;
-      padding: 20px;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    h2 {
-      margin: 0 0 15px 0;
-      color: #003d82;
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      width: 360px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 0;
+      overflow: hidden;
+    }
+    
+    .container {
+      padding: 24px;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 24px;
+      animation: fadeInDown 0.5s ease-out;
+    }
+    
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .logo {
+      font-size: 56px;
+      margin-bottom: 12px;
+      animation: bounce 1s ease-in-out;
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .title {
+      font-size: 22px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 6px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    
+    .subtitle {
+      font-size: 13px;
+      color: rgba(255,255,255,0.9);
+      font-weight: 400;
+    }
+    
+    .status-card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+      animation: fadeInUp 0.5s ease-out 0.1s both;
+    }
+    
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .status-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    
+    .status-icon {
+      font-size: 28px;
+    }
+    
+    .status-text {
+      flex: 1;
+    }
+    
+    .status-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #718096;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    
+    .status-value {
       font-size: 18px;
+      font-weight: 700;
     }
-    .status {
-      padding: 10px;
-      border-radius: 4px;
-      margin-bottom: 15px;
-      font-size: 14px;
+    
+    .status-value.enabled {
+      color: #10b981;
     }
-    .status.enabled {
-      background: #d4edda;
-      color: #155724;
+    
+    .status-value.disabled {
+      color: #ef4444;
     }
-    .status.disabled {
-      background: #f8d7da;
-      color: #721c24;
+    
+    .status-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
     }
-    button {
+    
+    .status-indicator.enabled {
+      background: #10b981;
+      box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+    }
+    
+    .status-indicator.disabled {
+      background: #ef4444;
+      box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2);
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    
+    .button {
       width: 100%;
-      padding: 10px;
       border: none;
-      border-radius: 4px;
-      font-size: 14px;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
       cursor: pointer;
-      margin-bottom: 10px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      animation: fadeInUp 0.5s ease-out 0.2s both;
     }
-    .btn-primary {
-      background: #003d82;
+    
+    .button-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
     }
-    .btn-primary:hover {
-      background: #0052a3;
+    
+    .button-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(102, 126, 234, 0.5);
     }
-    .btn-secondary {
-      background: #6c757d;
+    
+    .button-secondary {
+      background: #f7fafc;
+      color: #2d3748;
+      border: 2px solid #e2e8f0;
+    }
+    
+    .button-secondary:hover {
+      background: #edf2f7;
+      border-color: #cbd5e0;
+    }
+    
+    .button:active {
+      transform: translateY(0);
+    }
+    
+    .info-section {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+      animation: fadeInUp 0.5s ease-out 0.3s both;
+    }
+    
+    .info-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #2d3748;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .info-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+      color: #4a5568;
+      font-size: 13px;
+      border-bottom: 1px solid #f7fafc;
+    }
+    
+    .info-item:last-child {
+      border-bottom: none;
+    }
+    
+    .info-item-icon {
+      font-size: 16px;
+      width: 20px;
+      text-align: center;
+    }
+    
+    .footer {
+      text-align: center;
+      padding: 16px 24px;
       color: white;
+      font-size: 11px;
+      opacity: 0.9;
+      animation: fadeIn 0.5s ease-out 0.4s both;
     }
-    .btn-secondary:hover {
-      background: #5a6268;
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    .footer a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 1px solid rgba(255,255,255,0.4);
     }
   </style>
 </head>
 <body>
-  <h2>Leiden MFA Auto-Pass</h2>
-  <div id="status" class="status"></div>
-  <button id="toggleBtn" class="btn-primary">Toggle</button>
-  <button id="settingsBtn" class="btn-secondary">Settings</button>
+  <div class="container">
+    <div class="header">
+      <div class="logo">🔐</div>
+      <div class="title">Leiden MFA Auto-Pass</div>
+      <div class="subtitle">Automated two-factor authentication</div>
+    </div>
+
+    <div class="status-card">
+      <div class="status-header">
+        <div class="status-icon">⚡</div>
+        <div class="status-text">
+          <div class="status-label">Status</div>
+          <div id="statusValue" class="status-value">Loading...</div>
+        </div>
+        <div id="statusIndicator" class="status-indicator"></div>
+      </div>
+    </div>
+
+    <button id="toggleBtn" class="button button-primary">
+      <span id="toggleIcon">🔄</span>
+      <span id="toggleText">Toggle</span>
+    </button>
+
+    <button id="settingsBtn" class="button button-secondary">
+      <span>⚙️</span>
+      <span>Open Settings</span>
+    </button>
+
+    <div class="info-section">
+      <div class="info-title">
+        <span>📋</span>
+        <span>Quick Info</span>
+      </div>
+      <ul class="info-list">
+        <li class="info-item">
+          <span class="info-item-icon">✅</span>
+          <span>One-time attempt per session</span>
+        </li>
+        <li class="info-item">
+          <span class="info-item-icon">🔒</span>
+          <span>Local storage only</span>
+        </li>
+        <li class="info-item">
+          <span class="info-item-icon">⚡</span>
+          <span>Automatic code generation</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer">
+    Made with ❤️ by <a href="https://github.com/teshnizi2/leiden-mfa-autopass" target="_blank">teshnizi2</a>
+  </div>
 
   <script src="popup.js"></script>
 </body>
