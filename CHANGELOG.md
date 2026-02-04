@@ -2,6 +2,20 @@
 
 All notable changes to the Leiden MFA Auto-Pass extension.
 
+## [2.0.4] - 2026-02-04
+
+### Added
+- 📸 **Complete Visual Setup Guide** with 5 step-by-step screenshots
+- 🖼️ **Screenshots folder** (docs/screenshots/) with all setup images
+- 🔗 **Direct links** to Leiden Identity Manager in documentation
+- 📝 **Enhanced instructions** showing exact Leiden workflow
+
+### Improved
+- 📖 README.md now includes screenshot previews
+- 📋 INSTALL.md updated with visual guide references
+- ⚙️ Settings page links directly to Leiden dashboard
+- 🎯 All documentation now points to visual walkthrough
+
 ## [2.0.3] - 2026-02-04
 
 ### Improved
