@@ -1,22 +1,32 @@
 # Leiden MFA Auto-Pass
 
-Automate Leiden University’s two-factor login. **One-time setup (~10 min)** — then the extension fills and submits the code for you.
+[![Version](https://img.shields.io/badge/version-2.0.5-blue)](https://github.com/teshnizi2/leiden-mfa-autopass)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![Setup](https://img.shields.io/badge/setup-~15%20min-0078D4)](https://github.com/teshnizi2/leiden-mfa-autopass#full-setup-guide)
 
-**Works in:** Edge, Chrome, Brave, Opera · **Works on:** Windows, Mac, Linux
+Automate Leiden University’s two-factor login. One-time setup (**~15 minutes**), then the extension fills and submits the code for you—no more copying codes from your phone.
+
+| | |
+|:--|:--|
+| **Browsers** | Edge, Chrome, Brave, Opera (Chromium-based) |
+| **Platforms** | Windows, macOS, Linux |
+| **Repository** | [github.com/teshnizi2/leiden-mfa-autopass](https://github.com/teshnizi2/leiden-mfa-autopass) |
 
 ---
 
 ## Full setup guide
 
-| Step | What you do |
-|------|-------------|
-| [1](#step-1--download) | Download |
-| [2](#step-2--install-the-extension) | Install the extension |
-| [3](#step-3--open-extension-settings) | Open extension settings |
-| [4](#step-4--get-your-secret-key-from-leiden) | Get your secret key from Leiden |
-| [5](#step-5--configure-the-extension) | Configure the extension |
-| [6](#step-6--enable-the-extension) | Enable the extension |
-| [7](#step-7--youre-done) | You’re done |
+Follow these steps once. After that, visiting a Leiden login page will complete 2FA automatically.
+
+| # | Step |
+|---|------|
+| 1 | [Download](#step-1--download) |
+| 2 | [Install the extension](#step-2--install-the-extension) |
+| 3 | [Open extension settings](#step-3--open-extension-settings) |
+| 4 | [Get your secret key from Leiden](#step-4--get-your-secret-key-from-leiden) |
+| 5 | [Configure the extension](#step-5--configure-the-extension) |
+| 6 | [Enable the extension](#step-6--enable-the-extension) |
+| 7 | [You’re done](#step-7--youre-done) |
 
 ---
 
@@ -36,7 +46,7 @@ Automate Leiden University’s two-factor login. **One-time setup (~10 min)** �
 
 ### Step 2 — Install the extension
 
-1. Open **Manage extensions** in your browser (extensions icon in the toolbar, or go to the extensions page).
+1. Open **Manage extensions** in your browser (extensions icon in the toolbar, or your browser’s extensions page).
 
    ![Manage extensions](docs/screenshots/image8.jpg)
 
@@ -61,7 +71,7 @@ Automate Leiden University’s two-factor login. **One-time setup (~10 min)** �
 ### Step 3 — Open extension settings
 
 1. In the extensions menu or list, find **Leiden MFA Auto-Pass**.
-2. Click it, then click **Open Settings** (or use **Extension options** from the extensions management page).
+2. Click it, then click **Open Settings** (or **Extension options** from the extensions management page).
 
    ![Choose Leiden MFA Auto-Pass](docs/screenshots/image13.jpg)
 
@@ -124,23 +134,30 @@ The extension is **Disabled** by default. Before you test, turn it on:
 
 3. The extension will choose “Code from non-NetIQ Authenticator”, generate the code, fill it in, and submit. You should be logged in without typing a code.
 
-The extension only runs once per browser session on the code step to avoid lockouts. To run it again in the same session, close all browser windows and open a new one.
+> **Note:** The extension runs once per browser session on the code step to avoid lockouts. To run it again in the same session, close all browser windows and open a new one.
 
 ---
 
 ## Summary
 
 | Step | What you do | Time |
-|------|-------------|------|
-| 1 | Download ZIP and unzip (Mac: double-click / Windows: right-click → Extract) | ~1 min |
-| 2 | Manage extensions → Developer mode → Load unpacked → Select `extension` folder | ~2 min |
+|:----:|-------------|:----:|
+| 1 | Download ZIP and unzip (Mac: double-click / Windows: right-click → Extract) | ~2 min |
+| 2 | Manage extensions → Developer mode → Load unpacked → Select `extension` folder | ~3 min |
 | 3 | Choose Leiden MFA Auto-Pass → Open Settings | ~1 min |
-| 4 | Get secret key from Leiden Identity Manager | ~3 min |
-| 5 | Paste secret in extension, save, complete enrollment if needed | ~2 min |
-| 6 | Enable the extension | ~0 min |
+| 4 | Get secret key from Leiden Identity Manager | ~4 min |
+| 5 | Paste secret in extension, save, complete enrollment if needed | ~3 min |
+| 6 | Enable the extension | — |
 | 7 | Log in to a Leiden site — extension does the rest | ~2 min |
 
-**Total: about 10 minutes.**
+**Total: about 15 minutes.**
+
+---
+
+## Author
+
+**teshnizi2** — sole contributor and maintainer  
+[https://github.com/teshnizi2/leiden-mfa-autopass](https://github.com/teshnizi2/leiden-mfa-autopass)
 
 ---
 

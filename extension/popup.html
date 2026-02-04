@@ -221,22 +221,37 @@
     .footer {
       text-align: center;
       padding: 16px 24px;
-      color: white;
-      font-size: 11px;
-      opacity: 0.9;
       animation: fadeIn 0.5s ease-out 0.4s both;
+    }
+    
+    .footer a {
+      display: inline-block;
+      color: #0f172a;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.95);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: all 0.2s ease;
+    }
+    
+    .footer a:hover {
+      background: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transform: translateY(-1px);
+    }
+    
+    .footer a:active {
+      transform: translateY(0);
     }
     
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
-    }
-    
-    .footer a {
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      border-bottom: 1px solid rgba(255,255,255,0.4);
     }
   </style>
 </head>
@@ -271,7 +286,7 @@
   </div>
 
   <div class="footer">
-    Made with ❤️ by <a href="https://github.com/teshnizi2/leiden-mfa-autopass" target="_blank">teshnizi2</a>
+    <a href="https://github.com/teshnizi2/leiden-mfa-autopass" target="_blank" rel="noopener">Made with ❤️ by <strong>teshnizi2</strong></a>
   </div>
 
   <script src="popup.js"></script>
