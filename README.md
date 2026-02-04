@@ -15,7 +15,8 @@ Browser extension for **Leiden University** that automates two-factor authentica
 - **Session-safe** — Single attempt per session to avoid lockouts.
 - **Live verification** — Settings page shows the current TOTP code so you can confirm it matches your app.
 
-**Supported browsers:** Edge, Chrome, Brave, Opera, Vivaldi, Arc (any Chromium-based browser). Not compatible with Firefox or Safari.
+**Supported browsers:** Edge, Chrome, Brave, Opera, Vivaldi, Arc (any Chromium-based browser). Not compatible with Firefox or Safari.  
+**Works on:** Windows, macOS, and Linux — same installation steps on all platforms.
 
 ---
 

@@ -11,6 +11,8 @@ This guide walks you through installing and configuring **Leiden MFA Auto-Pass**
 - A Leiden University account with access to Identity Manager
 - About 10 minutes for one-time setup
 
+The extension works on **Windows, macOS, and Linux**; installation is the same on all platforms.
+
 ---
 
 ## Step 1 — Download the Extension
