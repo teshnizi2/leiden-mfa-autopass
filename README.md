@@ -1,44 +1,60 @@
-# Leiden MFA Auto-Pass
+<p align="center">
+  <img src="https://img.shields.io/badge/Leiden%20MFA%20Auto--Pass-v2.0.5-0078D4?style=for-the-badge" alt="Version" />
+  <img src="https://img.shields.io/badge/license-MIT-2ea043?style=for-the-badge" alt="License" />
+  <img src="https://img.shields.io/badge/setup-~15%20min-0078D4?style=for-the-badge" alt="Setup time" />
+</p>
 
-[![Version](https://img.shields.io/badge/version-2.0.5-blue)](https://github.com/teshnizi2/leiden-mfa-autopass)
-[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-[![Setup](https://img.shields.io/badge/setup-~15%20min-0078D4)](https://github.com/teshnizi2/leiden-mfa-autopass#full-setup-guide)
+<h1 align="center">Leiden MFA Auto-Pass</h1>
 
-Automate Leiden University’s two-factor login. One-time setup (**~15 minutes**), then the extension fills and submits the code for you—no more copying codes from your phone.
+<p align="center">
+  <strong>Automate Leiden University two-factor login.</strong><br />
+  One-time setup, then the extension fills and submits the TOTP code for you—no more copying from your phone.
+</p>
+
+<p align="center">
+  <a href="#full-setup-guide">Setup guide</a> •
+  <a href="#step-1--download">Download</a> •
+  <a href="#author">Author</a>
+</p>
+
+---
+
+## At a glance
 
 | | |
-|:--|:--|
+|:---|:---|
 | **Browsers** | Edge, Chrome, Brave, Opera (Chromium-based) |
 | **Platforms** | Windows, macOS, Linux |
+| **Method** | TOTP (Authenticator code only) |
 | **Repository** | [github.com/teshnizi2/leiden-mfa-autopass](https://github.com/teshnizi2/leiden-mfa-autopass) |
 
 ---
 
 ## Full setup guide
 
-Follow these steps once. After that, visiting a Leiden login page will complete 2FA automatically.
+Do this once. After that, visiting a Leiden login page will complete 2FA automatically.
 
-| # | Step |
-|---|------|
+| Step | Action |
+|:----:|:-------|
 | 1 | [Download](#step-1--download) |
 | 2 | [Install the extension](#step-2--install-the-extension) |
 | 3 | [Open extension settings](#step-3--open-extension-settings) |
 | 4 | [Get your secret key from Leiden](#step-4--get-your-secret-key-from-leiden) |
 | 5 | [Configure the extension](#step-5--configure-the-extension) |
 | 6 | [Enable the extension](#step-6--enable-the-extension) |
-| 7 | [You’re done](#step-7--youre-done) |
+| 7 | [Done](#step-7--youre-done) |
 
 ---
 
 ### Step 1 — Download
 
-1. On this page, click the green **Code** button, then **Download ZIP**.
+1. On this repo, click **Code** → **Download ZIP**.
 
    ![Download ZIP](docs/screenshots/image6.jpg)
 
-2. Unzip the file on your computer:
-   - **Mac:** Double-click the ZIP file.
-   - **Windows:** Right-click the ZIP file → **Extract all** (or “Unzip”).
+2. Unzip the file:
+   - **macOS:** Double-click the ZIP.
+   - **Windows:** Right-click → **Extract all** (or Unzip).
 
    ![Unzip](docs/screenshots/image7.png)
 
@@ -46,11 +62,11 @@ Follow these steps once. After that, visiting a Leiden login page will complete 
 
 ### Step 2 — Install the extension
 
-1. Open **Manage extensions** in your browser (extensions icon in the toolbar, or your browser’s extensions page).
+1. Open **Manage extensions** (toolbar icon or your browser’s extensions page).
 
    ![Manage extensions](docs/screenshots/image8.jpg)
 
-2. Turn **Developer mode** on (toggle at the bottom of the page).
+2. Turn **Developer mode** on (toggle at the bottom).
 
    ![Developer mode](docs/screenshots/image9.png)
 
@@ -58,11 +74,11 @@ Follow these steps once. After that, visiting a Leiden login page will complete 
 
    ![Load unpacked](docs/screenshots/image10.jpg)
 
-4. In the folder you downloaded and unzipped, open the **`extension`** folder (the one that contains `manifest.json`), then click **Select** (or **Select Folder**).
+4. Select the **`extension`** folder (the one containing `manifest.json`) and confirm.
 
    ![Select extension folder](docs/screenshots/image11.jpg)
 
-5. **Leiden MFA Auto-Pass** should now appear in your extensions list.
+5. **Leiden MFA Auto-Pass** should appear in your extensions list.
 
    ![Added to extensions](docs/screenshots/image12.png)
 
@@ -70,8 +86,8 @@ Follow these steps once. After that, visiting a Leiden login page will complete 
 
 ### Step 3 — Open extension settings
 
-1. In the extensions menu or list, find **Leiden MFA Auto-Pass**.
-2. Click it, then click **Open Settings** (or **Extension options** from the extensions management page).
+1. Find **Leiden MFA Auto-Pass** in the extensions menu or list.
+2. Click it, then **Open Settings** (or **Extension options** from the management page).
 
    ![Choose Leiden MFA Auto-Pass](docs/screenshots/image13.jpg)
 
@@ -83,15 +99,15 @@ Follow these steps once. After that, visiting a Leiden login page will complete 
 
 1. Open **[Leiden Identity Manager](https://account.services.universiteitleiden.nl/idmdash/#/landing)** and sign in.
 
-2. Open the **Multi-Factor Authentication** section.
+2. Go to **Multi-Factor Authentication**.
 
    ![Dashboard](docs/screenshots/image1.jpg)
 
-3. Find **TOTP Non-NetIQ Authenticator** and click **Enroll** (first time) or **Modify** (if you already use it).
+3. Under **TOTP Non-NetIQ Authenticator**, click **Enroll** (first time) or **Modify** (if already set up).
 
    ![Select authenticator](docs/screenshots/image2.jpg)
 
-4. On the next page, **copy the secret key** (the long string of letters and numbers). Keep this tab open for Step 5.
+4. **Copy the secret key** (long alphanumeric string). Keep this tab open for the next step.
 
    ![Secret key](docs/screenshots/image3.jpg)
 
@@ -99,42 +115,40 @@ Follow these steps once. After that, visiting a Leiden login page will complete 
 
 ### Step 5 — Configure the extension
 
-1. In the extension **Settings** page, paste your secret key into **TOTP Secret Key**.
+1. In the extension **Settings**, paste your secret key into **TOTP Secret Key**.
 
    ![Settings](docs/screenshots/image4.jpg)
 
-2. A **6-digit code** will appear below and update every 30 seconds.
+2. A **6-digit code** will appear and refresh every 30 seconds.
 
    ![TOTP code](docs/screenshots/image5.jpg)
 
-3. If Leiden is still asking for a code to finish enrollment: switch to the Leiden tab, enter the 6-digit code from the extension, and click **Next**.
+3. If Leiden still asks for a code to finish enrollment: in the Leiden tab, enter that 6-digit code and click **Next**.
 
 4. Back in the extension, click **Save Settings**.
 
-5. *(Optional)* To auto-fill your Leiden username and password on the login page, enable **Auto-fill credentials**, enter them, and save again.
+5. *(Optional)* Enable **Auto-fill credentials**, enter your Leiden username and password, and save to auto-fill the login form.
 
 ---
 
 ### Step 6 — Enable the extension
 
-The extension is **Disabled** by default. Before you test, turn it on:
+The extension is **disabled** by default. Before testing:
 
-1. Click the **Leiden MFA Auto-Pass** icon in the toolbar (or open the extensions menu).
+1. Click the **Leiden MFA Auto-Pass** icon (or open the extensions menu).
 2. Click **Enable**.
 
    ![Enable the extension](docs/screenshots/image15.jpg)
 
 ---
 
-### Step 7 — You’re done
+### Step 7 — You're done
 
-1. Go to any Leiden login page (e.g. [login.leidenuniv.nl](https://login.leidenuniv.nl/)).
+1. Go to a Leiden login page (e.g. [login.leidenuniv.nl](https://login.leidenuniv.nl/)).
 
-2. Sign in with your username and password (or let the extension fill them if you turned that on).
+2. Sign in with your username and password (or let the extension fill them if you enabled that).
 
-3. The extension will choose “Code from non-NetIQ Authenticator”, generate the code, fill it in, and submit. You should be logged in without typing a code.
-
-> **Note:** The extension runs once per browser session on the code step to avoid lockouts. To run it again in the same session, close all browser windows and open a new one.
+3. The extension will select “Code from non-NetIQ Authenticator”, enter the code, and submit. You should be logged in without typing a code.
 
 ---
 

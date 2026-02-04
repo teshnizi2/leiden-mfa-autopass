@@ -1,23 +1,11 @@
 // Content script for fully automated Leiden MFA authentication
-// ABSOLUTE ONE-TIME ATTEMPT - Uses persistent storage to NEVER retry
+// Runs every time it sees the code entry page (no session lock)
 
 (function() {
   'use strict';
 
-  // PERSISTENT LOCK - Check if we've EVER attempted in this browser session
-  const LOCK_KEY = 'leiden_mfa_attempted';
-  const SESSION_LOCK_KEY = 'leiden_mfa_session_lock';
-  
-  // Check sessionStorage first (persists across page navigations)
-  if (sessionStorage.getItem(SESSION_LOCK_KEY)) {
-    console.log('[Leiden MFA Auto-Pass] ❌ LOCKED - Already attempted in this session');
-    console.log('[Leiden MFA Auto-Pass] Extension will not run again until you close the browser');
-    return;
-  }
-
-  // Check window flag (prevents duplicate script injection)
+  // Prevent duplicate execution on the same page load only
   if (window.__LEIDEN_MFA_EXTENSION_ACTIVE) {
-    console.log('[Leiden MFA Auto-Pass] ❌ LOCKED - Script already running on this page');
     return;
   }
   window.__LEIDEN_MFA_EXTENSION_ACTIVE = true;
@@ -46,10 +34,7 @@
       return;
     }
 
-    console.log('[Leiden MFA Auto-Pass] ============================================');
-    console.log('[Leiden MFA Auto-Pass] Extension loaded - SINGLE ATTEMPT MODE');
-    console.log('[Leiden MFA Auto-Pass] Will attempt ONCE and lock for this session');
-    console.log('[Leiden MFA Auto-Pass] ============================================');
+    console.log('[Leiden MFA Auto-Pass] Extension loaded');
     
     // Wait for DOM to be ready
     if (document.readyState === 'loading') {
@@ -59,7 +44,6 @@
     }
   });
 
-  // Handle page - ONLY ONCE EVER
   function handlePageOnce() {
     console.log('[Leiden MFA Auto-Pass] Analyzing page...');
     
@@ -212,15 +196,9 @@
     }
   }
 
-  // Handle code entry page - THIS IS THE CRITICAL STEP
+  // Handle code entry page
   function handleCodeEntry() {
-    console.log('[Leiden MFA Auto-Pass] ============================================');
-    console.log('[Leiden MFA Auto-Pass] ✅ STEP 3: Code entry page');
-    console.log('[Leiden MFA Auto-Pass] ⚠️  LOCKING SESSION - No more attempts after this');
-    console.log('[Leiden MFA Auto-Pass] ============================================');
-    
-    // SET THE LOCK IMMEDIATELY - Before doing ANYTHING
-    sessionStorage.setItem(SESSION_LOCK_KEY, 'true');
+    console.log('[Leiden MFA Auto-Pass] ✅ Code entry page detected');
     
     // Find code input - prioritize nffc field
     const codeInput = document.querySelector('input[name="nffc"]') ||
@@ -288,11 +266,6 @@
           if (submitButton) {
             setTimeout(() => {
               console.log('[Leiden MFA Auto-Pass] ✅ Clicking submit button');
-              console.log('[Leiden MFA Auto-Pass] ============================================');
-              console.log('[Leiden MFA Auto-Pass] 🔒 SESSION LOCKED 🔒');
-              console.log('[Leiden MFA Auto-Pass] Extension will NOT run again in this session');
-              console.log('[Leiden MFA Auto-Pass] Close browser to reset');
-              console.log('[Leiden MFA Auto-Pass] ============================================');
               submitButton.click();
             }, 500);
           } else {
