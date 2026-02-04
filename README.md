@@ -30,7 +30,7 @@
 
 ---
 
-## Full setup guide
+## Full setup guide (~15Min)
 
 Do this once. After that, visiting a Leiden login page will complete 2FA automatically.
 
