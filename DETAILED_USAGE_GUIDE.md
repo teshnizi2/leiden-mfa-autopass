@@ -1,338 +1,114 @@
-# Detailed Usage Guide - Fully Automated Leiden MFA Auto-Pass
+# Detailed Usage Guide
 
-## 📖 Complete Step-by-Step Instructions
-
-This guide will walk you through setting up and using the **fully automated** Leiden MFA Auto-Pass extension for Microsoft Edge. The extension handles **everything automatically** - no user interaction needed after initial setup!
-
----
-
-## Part 1: Installation
-
-### Step 1: Prepare the Extension Folder
-
-1. **Locate the extension folder**
-   - Navigate to: `/Users/teshnizi/Documents/Auto-Two-Auth-Pass/extension`
-   - Make sure you can see these files:
-     - `manifest.json`
-     - `content-script.js`
-     - `background.js`
-     - `options.html`
-     - `totp-simple.js`
-     - `icons/` folder
-
-2. **Keep this folder accessible** (don't move it after installation)
+This guide covers installation, configuration, daily use, and troubleshooting for **Leiden MFA Auto-Pass**.  
+**First-time setup: ~10 minutes.**
 
 ---
 
-### Step 2: Install Extension in Microsoft Edge
+## 1. Installation
 
-1. **Open Microsoft Edge**
+### 1.1 Get the extension
 
-2. **Navigate to Extensions Page**
-   - Type `edge://extensions/` in the address bar and press Enter
-   - OR: Click the three dots (⋯) menu → Extensions → Manage extensions
+- Download the repo as ZIP (Code → Download ZIP) and unzip, or clone the repository.
+- You need the **`extension`** folder (the one containing `manifest.json`).
 
-3. **Enable Developer Mode**
-   - Look at the **bottom-left** corner of the extensions page
-   - Find the toggle switch labeled **"Developer mode"**
-   - Click it to turn it **ON** (it should turn blue)
-   - ✅ You should now see new buttons: "Load unpacked", "Pack extension", etc.
+### 1.2 Load in your browser
 
-4. **Load the Extension**
-   - Click the **"Load unpacked"** button
-   - A file browser window will open
-   - Navigate to: `/Users/teshnizi/Documents/Auto-Two-Auth-Pass/extension`
-   - **Important**: Select the **`extension`** folder (the one containing `manifest.json`)
-   - Click **"Select Folder"** (Mac) or **"Select Folder"** (Windows)
+1. Open the extensions page: `edge://extensions/`, `chrome://extensions/`, or equivalent.
+2. Turn **Developer mode** on.
+3. Click **Load unpacked** and select the **`extension`** folder.
+4. Confirm **Leiden MFA Auto-Pass** appears and is enabled.
 
-5. **Verify Installation**
-   - You should see **"Leiden MFA Auto-Pass"** in your extensions list
-   - The extension icon should appear in your Edge toolbar
-   - If you don't see it, click the **puzzle piece icon (🧩)** in the toolbar
-   - Status should show "Enabled" (toggle should be blue/on)
+Supported: Edge, Chrome, Brave, Opera, Vivaldi, Arc. Not supported: Firefox, Safari.
 
 ---
 
-## Part 2: Set Up Secret Key (One-Time Setup)
+## 2. One-time setup (~10 minutes)
 
-### Step 3: Automatic Secret Key Detection (Recommended)
+### 2.1 Get your TOTP secret key
 
-This is the **easiest method** - the extension will automatically detect and save your secret key!
+1. Go to [Leiden Identity Manager](https://account.services.universiteitleiden.nl/idmdash/#/landing).
+2. Open **Multi-Factor Authentication**.
+3. Choose **TOTP Non-NetIQ Authenticator** → **Enroll** or **Modify**.
+4. Copy the **secret key** (long Base32 string). Keep the tab open to complete enrollment.
 
-1. **Log into Leiden University Account Services**
-   - Go to: `https://accountservices.universiteitleiden.nl/` (or your Leiden login portal)
-   - Log in with your username and password
+Step-by-step with screenshots: [VISUAL_SETUP_GUIDE.md](VISUAL_SETUP_GUIDE.md).
 
-2. **Navigate to Multi-Factor Authentication Settings**
-   - Look for **"Multi-Factor Authentication"** or **"MFA"** in the menu
-   - Click on it
+### 2.2 Configure the extension
 
-3. **Select "Non-NetIQ Authenticator"**
-   - Find the option for **"Non-NetIQ Authenticator"** or **"Authenticator App"**
-   - Click **"Enroll"** or **"Modify"**
-
-4. **Reveal the Secret Key**
-   - You'll see a QR code and a secret key
-   - Look for an **eye icon (👁️)** or **"Show"** button
-   - **Click it** to reveal the secret key text
-   - The secret key should now be visible (a long string like `JBSWY3DPEHPK3PXP...`)
-
-5. **Extension Auto-Detects!**
-   - The extension will **automatically detect** the secret key
-   - You'll see a **green notification** in the top-right corner:
-     - "Secret key detected and saved! Extension is ready for fully automated login."
-   - The extension automatically saves it
-
-6. **Verify It Worked**
-   - Go to Extension Settings (click extension icon → Settings)
-   - You should see a green box saying: **"✅ Secret Key Detected and Saved!"**
-   - The secret key (first 8 characters) should be displayed
-
-**✅ Done!** Your secret key is now saved and ready to use.
+1. Open the extension **Options** (toolbar icon → Open Settings, or from the extensions page).
+2. Paste the secret key into **TOTP Secret Key** and click **Save Settings**.
+3. A live 6-digit code will appear; use it on the Leiden page to finish enrollment if asked.
+4. (Optional) Enable **Auto-fill credentials** and enter your Leiden username and password.
 
 ---
 
-### Step 4: Manual Secret Key Entry (If Auto-Detection Doesn't Work)
+## 3. Using the extension
 
-If the automatic detection didn't work, you can manually enter the secret key:
+### 3.1 Normal login flow
 
-1. **Get Your Secret Key**
-   - Follow steps 1-4 from Step 3 above
-   - **Copy the secret key** manually (select text and Ctrl+C / Cmd+C)
-   - It should look like: `JBSWY3DPEHPK3PXP` or longer
+1. Go to a Leiden login page (e.g. [login.leidenuniv.nl](https://login.leidenuniv.nl/)).
+2. If auto-fill is enabled, the extension can fill username/password and submit; otherwise sign in yourself.
+3. On the MFA step, the extension will:
+   - Select **Code from non-NetIQ Authenticator**
+   - Generate the TOTP code
+   - Fill the code field and submit
+4. You should be logged in without typing a code.
 
-2. **Enter in Settings**
-   - Go to Extension Settings (click extension icon → Settings)
-   - Find the text field: **"TOTP Secret Key"**
-   - **Paste your secret key** into this field
-   - You can paste:
-     - Just the secret: `JBSWY3DPEHPK3PXP`
-     - Or the full otpauth URL: `otpauth://totp/...?secret=JBSWY3DPEHPK3PXP`
-   - The extension will extract the secret automatically
+The extension runs **once per session** on the code step to avoid lockouts. To “reset” and allow another attempt, close all windows for that browser and start a new session.
 
-3. **Save Settings**
-   - Click **"Save Settings"**
-   - You should see: "Settings saved successfully!"
+### 3.2 Enabling or disabling
 
----
+- Click the extension icon. Use the button to **Enable** or **Disable** automation. The popup shows the current status.
 
-## Part 3: Configure Settings (Optional)
+### 3.3 Changing settings
 
-### Step 5: Configure Extension Settings
-
-1. **Open Extension Settings**
-   - Click the extension icon in Edge toolbar
-   - Click **"Settings"** button
-
-2. **Basic Settings** (should be checked by default)
-   - ✅ **Enable automation**: Make sure checkbox is checked
-   - ✅ **Auto-advance after selection**: Check this box
-   - ✅ **Auto-fill and submit TOTP code**: Check this box
-
-3. **Optional: Enable Credential Auto-Fill**
-   - ✅ Check **"Auto-fill login credentials (Optional)"**
-   - Enter your **Username** (Leiden University username)
-   - Enter your **Password** (Leiden University password)
-   - **Note**: Credentials are stored locally and encrypted
-
-4. **Click "Save Settings"**
-   - You should see a green message: "Settings saved successfully!"
+- Open **Options** from the extension icon or the extensions page. Change the secret key, credentials, or auto-fill options, then click **Save Settings**. You may need to refresh the Leiden tab for changes to apply.
 
 ---
 
-## Part 4: Using the Extension (Fully Automated!)
+## 4. Verifying your setup
 
-### Step 6: Fully Automated Login Flow
+The extension **Options** page shows the **current TOTP code** next to your secret key. Use it to confirm configuration:
 
-Once your secret key is set up, the extension handles **everything automatically**:
-
-1. **Visit Any Leiden Login Page**
-   - Go to any Leiden University service that requires login
-   - Example: `https://mfa.services.universiteitleiden.nl/...`
-
-2. **If Credential Auto-Fill is Enabled:**
-   - ✅ Extension automatically fills username
-   - ✅ Extension automatically fills password
-   - ✅ Extension automatically clicks Login/Submit
-   - **No action needed from you!**
-
-3. **If Credential Auto-Fill is NOT Enabled:**
-   - Enter your username and password manually
-   - Click Login/Submit
-
-4. **Extension Handles MFA Automatically:**
-   - ✅ Automatically selects **"Non-NetIQ Authenticator"** method
-   - ✅ Automatically clicks **"Next"**
-   - ✅ Automatically generates the current TOTP code
-   - ✅ Automatically fills the code
-   - ✅ Automatically clicks Submit/Verify
-   - **No user interaction needed!**
-
-5. **You're Logged In!**
-   - The extension completes the entire flow automatically
-   - You should be redirected to the service you were logging into
-   - **That's it!** No copying codes, no manual entry, nothing!
+1. Open extension **Options** and ensure your secret is saved.
+2. Check that the 6-digit code and countdown match what you expect.
+3. Compare with your phone authenticator app (e.g. Google Authenticator). The codes should match. If not, re-enter the secret from Leiden Identity Manager.
 
 ---
 
-## Part 5: Managing the Extension
+## 5. Troubleshooting
 
-### Step 7: Enable/Disable Extension
-
-1. **Quick Toggle**
-   - Click the extension icon in toolbar
-   - Click **"Enable"** or **"Disable"** button
-   - Status will update immediately
-
-2. **Check Status**
-   - Extension icon popup shows:
-     - **"Automation is ENABLED"** (green) - Extension is active
-     - **"Automation is DISABLED"** (red) - Extension is inactive
+| Issue | What to try |
+|-------|-------------|
+| Extension does nothing on Leiden page | Ensure it’s enabled in the popup and that you’re on a Leiden MFA page. Reload the page. Check the browser console (F12 → Console) for errors. |
+| Wrong or rejected TOTP code | Confirm the secret in Options is correct and complete. Check system time (TOTP is time-based). Compare the extension’s live code with your phone app. |
+| Account locked | Wait 15–30 minutes or contact Leiden IT. The extension is designed to attempt only once per session to reduce lockout risk. |
+| Credentials not auto-filled | Ensure **Auto-fill credentials** is enabled and username/password are set in Options. Confirm you’re on the correct Leiden login page. |
+| Extension icon not visible | Use the browser’s puzzle-piece (or similar) menu to find **Leiden MFA Auto-Pass** and pin it to the toolbar. |
 
 ---
 
-### Step 8: Update Settings
+## 6. Security and best practices
 
-1. **Open Settings**
-   - Click extension icon → Settings
-
-2. **Modify Any Setting**
-   - Change secret key
-   - Enable/disable auto-advance
-   - Update credentials
-   - Enable/disable credential auto-fill
-
-3. **Save Changes**
-   - Click **"Save Settings"**
-   - Settings apply immediately
-   - You may need to refresh MFA pages for changes to take effect
+- **Secret key:** Stored only in your browser; not sent to external servers. Treat it like a password; don’t share it.
+- **Credentials:** If you use auto-fill, only enable it on a trusted device. Use a strong password.
+- **Backup:** Keep a second 2FA method (e.g. your phone app) so you can still sign in if the extension or device is unavailable.
+- **Updates:** When you update the extension (e.g. re-download from GitHub), reload it from the extensions page.
 
 ---
 
-## Part 6: Troubleshooting
+## 7. Quick reference
 
-### Problem: Extension Not Working
-
-**Solution:**
-1. Check if extension is enabled (click icon → should say "ENABLED")
-2. Verify settings are saved (go to Settings → check all checkboxes)
-3. Make sure secret key is configured (check Settings page)
-4. Refresh the MFA page (F5 or Ctrl+R)
-5. Check browser console for errors (F12 → Console tab)
+| Item | Value |
+|------|--------|
+| Setup time | ~10 minutes (one-time) |
+| Extensions page | `edge://extensions/` or `chrome://extensions/` |
+| Leiden Identity Manager | [idmdash/#/landing](https://account.services.universiteitleiden.nl/idmdash/#/landing) |
+| Behavior | One attempt per session on code step |
 
 ---
 
-### Problem: Secret Key Not Detected
-
-**Solution:**
-1. Make sure you clicked the **eye icon** to reveal the secret key
-2. Verify the secret key is **visible** on the page (not hidden)
-3. Try manually entering it in settings (Step 4)
-4. Check that the secret key is a valid base32 string (A-Z, 2-7, =)
-
----
-
-### Problem: TOTP Code Not Generating
-
-**Solution:**
-1. Verify secret key is saved in settings
-2. Check that secret key is valid (base32 format, 16+ characters)
-3. Try refreshing the page
-4. Check browser console (F12) for error messages
-5. Make sure "Auto-fill and submit TOTP code" is checked in settings
-
----
-
-### Problem: Credentials Not Auto-Filling
-
-**Solution:**
-1. Verify **"Auto-fill login credentials"** is checked in settings
-2. Make sure username and password are entered in settings
-3. Check that you're on a Leiden login page
-4. Try manually entering credentials once, then refresh
-
----
-
-### Problem: Extension Icon Not Visible
-
-**Solution:**
-1. Click the **puzzle piece (🧩)** icon in Edge toolbar
-2. Find "Leiden MFA Auto-Pass" in the list
-3. Click the **pin icon** to pin it to toolbar
-4. The icon should now be visible
-
----
-
-## Part 7: Quick Reference
-
-### Keyboard Shortcuts
-
-- **Refresh Page**: F5 or Ctrl+R
-- **Open Console**: F12
-- **Extensions Page**: `edge://extensions/`
-
-### Important URLs
-
-- **Extensions Page**: `edge://extensions/`
-- **Leiden Login**: `https://mfa.services.universiteitleiden.nl/...`
-- **Account Services**: `https://accountservices.universiteitleiden.nl/`
-
-### Settings Checklist
-
-Before using the extension, verify:
-
-- ✅ Extension is installed and enabled
-- ✅ "Enable automation" is checked
-- ✅ "Auto-advance after selection" is checked
-- ✅ "Auto-fill and submit TOTP code" is checked
-- ✅ Secret key is configured (auto-detected or manually entered)
-- ✅ Credentials are set up (if using credential auto-fill)
-
----
-
-## Part 8: Security Best Practices
-
-1. **Keep Extension Updated**
-   - Check for updates regularly
-   - Re-download if you update the code
-
-2. **Secure Your Secret Key**
-   - Don't share your secret key with anyone
-   - Only enable credential auto-fill on trusted devices
-   - Use strong passwords
-
-3. **Monitor Extension Activity**
-   - Check browser console for any errors
-   - Verify extension is working as expected
-   - Disable if you notice unusual behavior
-
-4. **Backup Your Secret Key**
-   - Save your secret key in a secure password manager
-   - Don't rely solely on extension storage
-
----
-
-## 🎉 You're All Set!
-
-The extension is now fully configured and ready to use. It will **automatically handle all authentication steps** - no user interaction needed!
-
-**How It Works:**
-1. Visit any Leiden login page
-2. Extension auto-fills credentials (if enabled)
-3. Extension auto-selects Authenticator method
-4. Extension auto-generates TOTP code
-5. Extension auto-fills and submits
-6. **You're logged in!**
-
-**No copying codes, no manual entry, no interaction needed!** 🚀
-
----
-
-## Summary
-
-- **Installation**: Load extension in Edge Developer Mode
-- **Setup**: Auto-detect or manually enter secret key (one-time)
-- **Usage**: Visit login page → Extension handles everything automatically
-- **Result**: Fully automated login with zero user interaction!
-
-Enjoy your fully automated login experience! 🎊
+For installation only, see [INSTALL.md](INSTALL.md).  
+For a visual walkthrough with screenshots, see [VISUAL_SETUP_GUIDE.md](VISUAL_SETUP_GUIDE.md).  
+For bugs or feature requests, [open an issue](https://github.com/teshnizi2/leiden-mfa-autopass/issues) on GitHub.
