@@ -1,125 +1,113 @@
 # Leiden MFA Auto-Pass
 
-![Version](https://img.shields.io/badge/version-2.0.5-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
-![Setup](https://img.shields.io/badge/setup-~10%20min-blue)
+Automate Leiden University’s two-factor login. **One-time setup (~10 min)** — then the extension fills and submits the code for you.
 
-Browser extension for **Leiden University** that automates two-factor authentication using TOTP. One-time setup; afterward, login completes without entering codes manually.
+**Works in:** Edge, Chrome, Brave, Opera · **Works on:** Windows, Mac, Linux
 
 ---
 
-## Features
+## Full setup guide
 
-- **Fully automated** — Selects the correct auth method, generates the code, and submits it.
-- **Secure** — TOTP secret is stored only in your browser; nothing is sent to external servers.
-- **Session-safe** — Single attempt per session to avoid lockouts.
-- **Live verification** — Settings page shows the current TOTP code so you can confirm it matches your app.
-
-**Supported browsers:** Edge, Chrome, Brave, Opera, Vivaldi, Arc (any Chromium-based browser). Not compatible with Firefox or Safari.  
-**Works on:** Windows, macOS, and Linux — same installation steps on all platforms.
-
----
-
-## Quick Start
-
-**Estimated setup time: ~10 minutes.**
-
-1. **Download** — Use the green **Code** button → **Download ZIP**, then unzip.
-2. **Install** — Open `edge://extensions/` (or `chrome://extensions/`, etc.), turn on **Developer mode**, click **Load unpacked**, and select the `extension` folder.
-3. **Configure** — Open the extension’s **Options**, paste your TOTP secret key (see [how to get it](#getting-your-totp-secret-key)), then click **Save Settings**.
-4. **Use** — Go to a Leiden login page; the extension will handle 2FA automatically.
-
-Full step-by-step instructions: [INSTALL.md](INSTALL.md).
+| Step | What you do |
+|------|-------------|
+| [1](#step-1--download) | Download |
+| [2](#step-2--install-the-extension) | Install the extension |
+| [3](#step-3--get-your-secret-key-from-leiden) | Get your secret key from Leiden |
+| [4](#step-4--configure-the-extension) | Configure the extension |
+| [5](#step-5--youre-done) | You’re done |
 
 ---
 
-## Getting Your TOTP Secret Key
+### Step 1 — Download
 
-You need the TOTP secret from Leiden’s Identity Manager (one-time setup).
-
-1. Open **[Leiden Identity Manager](https://account.services.universiteitleiden.nl/idmdash/#/landing)**.
-2. Go to **Multi-Factor Authentication**.
-3. Choose **TOTP Non-NetIQ Authenticator** → **Enroll** or **Modify**.
-4. Copy the secret key (long Base32 string, e.g. `JBSWY3DPEHPK3PXP...`).
-5. Paste it into the extension’s **TOTP Secret Key** field and save. The settings page will show a live 6-digit code; use it to complete enrollment if prompted.
-
-**Visual guide with screenshots:** [VISUAL_SETUP_GUIDE.md](VISUAL_SETUP_GUIDE.md).
+1. Click the green **Code** button above → **Download ZIP**.
+2. Unzip the file on your computer.
 
 ---
 
-## How It Works
+### Step 2 — Install the extension
 
-On Leiden MFA pages, the extension:
+1. Open your browser’s extensions page:
+   - **Edge:** type `edge://extensions/` in the address bar  
+   - **Chrome:** `chrome://extensions/`  
+   - **Brave:** `brave://extensions/`  
+   - **Opera:** `opera://extensions/`
 
-1. **Login** — Optionally fills username/password and submits.
-2. **Method selection** — Chooses “Code from non-NetIQ Authenticator” and continues.
-3. **Code entry** — Generates the TOTP code, fills the field, and submits.
+2. Turn **Developer mode** on (toggle at the bottom).
 
-It runs **once per browser session** on the code-entry step to prevent repeated attempts and lockouts.
+3. Click **Load unpacked**.
 
----
+4. Select the **`extension`** folder (inside the folder you unzipped — it contains `manifest.json`).
 
-## Privacy & Security
-
-- Data is stored **only in your browser** (e.g. via `chrome.storage`).
-- No telemetry, analytics, or external API calls for your secret or codes.
-- Open source; you can review the code in this repository.
+5. **Leiden MFA Auto-Pass** should appear in the list and be enabled.
 
 ---
 
-## Configuration
+### Step 3 — Get your secret key from Leiden
 
-In the extension **Options** you can set:
+1. Open **[Leiden Identity Manager](https://account.services.universiteitleiden.nl/idmdash/#/landing)** and sign in.
 
-- **Enable/disable** automation.
-- **TOTP Secret Key** (required).
-- **Auto-fill credentials** (optional): Leiden username and password for the first login step.
+2. Open the **Multi-Factor Authentication** section.
 
----
+   ![Dashboard](docs/screenshots/image1.jpg)
 
-## Troubleshooting
+3. Find **TOTP Non-NetIQ Authenticator** and click **Enroll** (first time) or **Modify** (if you already use it).
 
-| Issue | What to try |
-|-------|-------------|
-| Extension does nothing | Ensure it’s enabled in Options and you’re on a Leiden MFA page. Check the browser console (F12) for errors. |
-| Wrong or rejected code | Confirm the secret in Options matches Leiden. Check that the live code in the settings matches your authenticator app and that your system clock is correct. |
-| Account locked | Wait 15–30 minutes or contact Leiden IT. The extension is designed to attempt only once per session to reduce lockout risk. |
+   ![Select authenticator](docs/screenshots/image2.jpg)
 
-More detail: [DETAILED_USAGE_GUIDE.md](DETAILED_USAGE_GUIDE.md).
+4. On the next page, **copy the secret key** (the long string of letters and numbers). Keep this tab open for Step 5.
+
+   ![Secret key](docs/screenshots/image3.jpg)
 
 ---
 
-## Documentation
+### Step 4 — Configure the extension
 
-| Document | Description |
-|----------|-------------|
-| [INSTALL.md](INSTALL.md) | Step-by-step installation and configuration (~10 min). |
-| [VISUAL_SETUP_GUIDE.md](VISUAL_SETUP_GUIDE.md) | Setup with screenshots. |
-| [DETAILED_USAGE_GUIDE.md](DETAILED_USAGE_GUIDE.md) | Usage, options, and troubleshooting. |
-| [CHANGELOG.md](CHANGELOG.md) | Version history. |
-| [CONTRIBUTING.md](CONTRIBUTING.md) | How to contribute. |
+1. Open the extension: click its icon in the toolbar → **Open Settings** (or open the extensions page and click **Extension options** for Leiden MFA Auto-Pass).
 
----
+2. Paste your secret key into **TOTP Secret Key**.
 
-## Project Structure
+   ![Settings](docs/screenshots/image4.jpg)
 
-```
-extension/
-├── manifest.json       # Extension manifest
-├── background.js       # Service worker (TOTP generation)
-├── content-script.js   # Page automation
-├── totp-simple.js      # TOTP implementation
-├── options.html / .js  # Settings UI
-├── popup.html / .js    # Toolbar popup
-└── icons/              # Extension icons
-```
+3. A **6-digit code** will appear below and update every 30 seconds.
+
+   ![TOTP code](docs/screenshots/image5.jpg)
+
+4. If Leiden is still asking for a code to finish enrollment: switch to the Leiden tab, enter the 6-digit code from the extension, and click **Next**.
+
+5. Back in the extension, click **Save Settings**.
+
+6. *(Optional)* To auto-fill your Leiden username and password on the login page, enable **Auto-fill credentials** and enter them, then save again.
 
 ---
 
-## License & Disclaimer
+### Step 5 — You’re done
 
-**License:** MIT. See [LICENSE](LICENSE).
+1. Go to any Leiden login page (e.g. [login.leidenuniv.nl](https://login.leidenuniv.nl/)).
 
-This project is not affiliated with Leiden University. Use at your own risk. Keep a backup 2FA method (e.g. your phone app) configured.
+2. Sign in with your username and password (or let the extension fill them if you turned that on).
 
+3. The extension will choose “Code from non-NetIQ Authenticator”, generate the code, fill it in, and submit. You should be logged in without typing a code.
+
+The extension only runs once per browser session on the code step to avoid lockouts. To run it again in the same session, close all browser windows and open a new one.
+
+---
+
+## Summary
+
+| Step | What you do | Time |
+|------|-------------|------|
+| 1 | Download ZIP and unzip | ~1 min |
+| 2 | Load the `extension` folder in your browser | ~2 min |
+| 3 | Get secret key from Leiden Identity Manager | ~3 min |
+| 4 | Paste secret in extension, save, complete enrollment if needed | ~2 min |
+| 5 | Log in to a Leiden site — extension does the rest | ~2 min |
+
+**Total: about 10 minutes.**
+
+---
+
+## License
+
+MIT. Not affiliated with Leiden University. Use at your own risk; keep a backup 2FA method (e.g. your phone app).  
 Inspired by [AutoULCN](https://github.com/kooroshkz/AutoULCN).

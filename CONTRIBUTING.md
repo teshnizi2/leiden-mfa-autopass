@@ -130,7 +130,7 @@ Before submitting a PR, test:
 If you're updating code that affects users:
 
 - Update `README.md` if needed
-- Update `INSTALL.md` for installation changes
+- Update README setup section for installation changes
 - Update `CHANGELOG.md` with your changes
 - Add code comments for complex logic
 

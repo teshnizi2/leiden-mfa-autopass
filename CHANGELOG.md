@@ -7,13 +7,12 @@ All notable changes to the Leiden MFA Auto-Pass extension.
 ### Removed
 - Unused files: `image.png`, `GITHUB_SETUP.md`, `push-to-github.sh`, `REPOSITORY_SUMMARY.md`, `DESIGN_FEATURES.md`, `DISTRIBUTION.md`, `BROWSER_COMPATIBILITY.md`
 - `extension/create-icons.py` (development-only; icons are included)
+- `INSTALL.md`, `VISUAL_SETUP_GUIDE.md`, `DETAILED_USAGE_GUIDE.md` — merged into README
 
 ### Documentation
-- README rewritten with professional copy; setup time set to ~10 minutes
-- INSTALL.md rewritten with clear steps and ~10 min estimate
-- VISUAL_SETUP_GUIDE.md tightened and aligned with 10 min setup
-- DETAILED_USAGE_GUIDE.md rewritten; removed auto-detection references; generic paths
-- Browser compatibility and sharing notes folded into README
+- Single **full setup guide** in README with all 5 steps and screenshots
+- No troubleshooting or extra docs; README is the only guide users need
+- Extension options link to README setup section on GitHub
 
 ## [2.0.4] - 2026-02-04
 
