@@ -138,30 +138,13 @@ The extension is **Disabled** by default. Before you test, turn it on:
 
 ---
 
-## Summary
-
-| Step | What you do | Time |
-|:----:|-------------|:----:|
-| 1 | Download ZIP and unzip (Mac: double-click / Windows: right-click → Extract) | ~2 min |
-| 2 | Manage extensions → Developer mode → Load unpacked → Select `extension` folder | ~3 min |
-| 3 | Choose Leiden MFA Auto-Pass → Open Settings | ~1 min |
-| 4 | Get secret key from Leiden Identity Manager | ~4 min |
-| 5 | Paste secret in extension, save, complete enrollment if needed | ~3 min |
-| 6 | Enable the extension | — |
-| 7 | Log in to a Leiden site — extension does the rest | ~2 min |
-
-**Total: about 15 minutes.**
-
----
-
 ## Author
 
-**teshnizi2** — sole contributor and maintainer  
+**teshnizi2**  
 [https://github.com/teshnizi2/leiden-mfa-autopass](https://github.com/teshnizi2/leiden-mfa-autopass)
 
 ---
 
 ## License
 
-MIT. Not affiliated with Leiden University. Use at your own risk; keep a backup 2FA method (e.g. your phone app).  
-Inspired by [AutoULCN](https://github.com/kooroshkz/AutoULCN).
+MIT. Not affiliated with Leiden University. Use at your own risk; keep a backup 2FA method (e.g. your phone app).
