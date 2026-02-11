@@ -162,9 +162,8 @@
    </p>
 
 8. The extension is **disabled** by default. Before testing:
-
-1. Click the **Leiden MFA Auto-Pass** icon (or open the extensions menu).
-2. Click **Enable**.
+   Click the **Leiden MFA Auto-Pass** icon (or open the extensions menu).
+   Click **Enable**.
 
    <p align="center">
      <img src="docs/screenshots/image15.jpg" alt="Enable the extension" width="600" />
