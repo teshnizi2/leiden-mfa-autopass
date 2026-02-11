@@ -17,12 +17,16 @@
   <a href="#author">Author</a>
 </p>
 
+<p align="center">
+  <sub>Works with Edge, Chrome, Brave, Opera • Windows, macOS, Linux</sub>
+</p>
+
 ---
 
-## At a glance
+## ✨ At a glance
 
-| | |
-|:---|:---|
+| Property | Details |
+|:---------|:--------|
 | **Browsers** | Edge, Chrome, Brave, Opera (Chromium-based) |
 | **Platforms** | Windows, macOS, Linux |
 | **Method** | TOTP (Authenticator code only) |
@@ -30,16 +34,16 @@
 
 ---
 
-## Full setup guide (~15Min)
+## 📋 Full setup guide (~15 min)
 
-Do this once. After that, visiting a Leiden login page will complete 2FA automatically.
+> **Do this once.** After that, visiting a Leiden login page will complete 2FA automatically.
 
-| Step | Action |
-|:----:|:-------|
+| # | Step |
+|:--:|:-----|
 | 1 | [Download](#step-1--download) |
 | 2 | [Install the extension](#step-2--install-the-extension) |
-| 3 | [Open extension settings](#step-3--open-extension-settings) |
-| 4 | [Get your secret key from Leiden](#step-4--get-your-secret-key-from-leiden) |
+| 3 | [Get your secret key from Leiden](#step-3--get-your-secret-key-from-leiden) |
+| 4 | [Open extension settings](#step-4--open-extension-settings) |
 | 5 | [Configure the extension](#step-5--configure-the-extension) |
 | 6 | [Complete Leiden enrollment](#step-6--complete-leiden-enrollment) |
 | 7 | [Enable the extension](#step-7--enable-the-extension) |
@@ -85,18 +89,7 @@ Do this once. After that, visiting a Leiden login page will complete 2FA automat
 
 ---
 
-### Step 3 — Open extension settings
-
-1. Find **Leiden MFA Auto-Pass** in the extensions menu or list.
-2. Click it, then **Open Settings** (or **Extension options** from the management page).
-
-   ![Choose Leiden MFA Auto-Pass](docs/screenshots/image13.jpg)
-
-   ![Open Settings](docs/screenshots/image14.jpg)
-
----
-
-### Step 4 — Get your secret key from Leiden
+### Step 3 — Get your secret key from Leiden
 
 1. Open **[Leiden Identity Manager](https://account.services.universiteitleiden.nl/idmdash/#/landing)** and sign in.
 
@@ -108,9 +101,21 @@ Do this once. After that, visiting a Leiden login page will complete 2FA automat
 
    ![Select authenticator](docs/screenshots/image2.jpg)
 
-4. **Copy the secret key** (long alphanumeric string). **Do not close this tab**—you'll need it in Step 6 to complete enrollment.
+4. **Copy the secret key** (long alphanumeric string).
+   > Keep this tab open—you'll need it in Step 6 to complete enrollment.
 
    ![Secret key](docs/screenshots/image3.jpg)
+
+---
+
+### Step 4 — Open extension settings
+
+1. Find **Leiden MFA Auto-Pass** in the extensions menu or list.
+2. Click it, then **Open Settings** (or **Extension options** from the management page).
+
+   ![Choose Leiden MFA Auto-Pass](docs/screenshots/image13.jpg)
+
+   ![Open Settings](docs/screenshots/image14.jpg)
 
 ---
 
@@ -120,19 +125,20 @@ Do this once. After that, visiting a Leiden login page will complete 2FA automat
 
    ![Settings](docs/screenshots/image4.jpg)
 
-2. A **6-digit code** will appear and refresh every 30 seconds. **Copy this code**—you'll need it in the next step.
+2. A **6-digit code** will appear and refresh every 30 seconds.
+   > Copy this code—you'll need it in the next step.
 
    ![TOTP code](docs/screenshots/image5.jpg)
 
 3. *(Optional)* Enable **Auto-fill credentials**, enter your Leiden username and password.
 
-4. Click **Save Settings** (you'll complete Leiden enrollment next, then enable the extension).
+4. Click **Save Settings**.
 
 ---
 
 ### Step 6 — Complete Leiden enrollment
 
-1. Go back to the **Leiden Identity Manager** tab (from Step 4).
+1. Go back to the **Leiden Identity Manager** tab (from Step 3).
 
 2. Enter the **6-digit code** from the extension (from Step 5) into the verification field.
 
@@ -153,23 +159,23 @@ The extension is **disabled** by default. Before testing:
 
 ---
 
-### Step 8 — You're done
+### Step 8 — You're done 🎉
 
 1. Go to a Leiden login page (e.g. [login.leidenuniv.nl](https://login.leidenuniv.nl/)).
 
 2. Sign in with your username and password (or let the extension fill them if you enabled that).
 
-3. The extension will select “Code from non-NetIQ Authenticator”, enter the code, and submit. You should be logged in without typing a code.
+3. The extension will select "Code from non-NetIQ Authenticator", enter the code, and submit. You should be logged in without typing a code.
 
 ---
 
-## Author
+## 👤 Author
 
 **teshnizi2**  
 [https://github.com/teshnizi2/leiden-mfa-autopass](https://github.com/teshnizi2/leiden-mfa-autopass)
 
 ---
 
-## License
+## 📄 License
 
 MIT. Not affiliated with Leiden University. Use at your own risk; keep a backup 2FA method (e.g. your phone app).
