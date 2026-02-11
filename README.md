@@ -87,6 +87,20 @@
 
    ![Added to extensions](docs/screenshots/image12.png)
 
+6. Find **Leiden MFA Auto-Pass** in the extensions menu or list.
+
+   
+
+   ![Choose Leiden MFA Auto-Pass](docs/screenshots/image13.jpg)
+
+7. Click it, then **Open Settings** (or **Extension options** from the management page).
+
+   ![Open Settings](docs/screenshots/image14.jpg)
+   
+8. find the TOTP configuration.
+
+<img width="808" height="983" alt="tg_image_2218435023" src="https://github.com/user-attachments/assets/5ae05d90-a7ee-465d-a2e4-bc5af8d5c476" />
+
 ---
 
 ### Step 3 — Get your secret key from Leiden
@@ -110,12 +124,7 @@
 
 ### Step 4 — Open extension settings
 
-1. Find **Leiden MFA Auto-Pass** in the extensions menu or list.
-2. Click it, then **Open Settings** (or **Extension options** from the management page).
 
-   ![Choose Leiden MFA Auto-Pass](docs/screenshots/image13.jpg)
-
-   ![Open Settings](docs/screenshots/image14.jpg)
 
 ---
 
