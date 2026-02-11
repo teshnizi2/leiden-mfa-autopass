@@ -41,8 +41,9 @@ Do this once. After that, visiting a Leiden login page will complete 2FA automat
 | 3 | [Open extension settings](#step-3--open-extension-settings) |
 | 4 | [Get your secret key from Leiden](#step-4--get-your-secret-key-from-leiden) |
 | 5 | [Configure the extension](#step-5--configure-the-extension) |
-| 6 | [Enable the extension](#step-6--enable-the-extension) |
-| 7 | [Done](#step-7--youre-done) |
+| 6 | [Complete Leiden enrollment](#step-6--complete-leiden-enrollment) |
+| 7 | [Enable the extension](#step-7--enable-the-extension) |
+| 8 | [Done](#step-8--youre-done) |
 
 ---
 
@@ -107,7 +108,7 @@ Do this once. After that, visiting a Leiden login page will complete 2FA automat
 
    ![Select authenticator](docs/screenshots/image2.jpg)
 
-4. **Copy the secret key** (long alphanumeric string). Keep this tab open for the next step.
+4. **Copy the secret key** (long alphanumeric string). **Do not close this tab**—you'll need it in Step 6 to complete enrollment.
 
    ![Secret key](docs/screenshots/image3.jpg)
 
@@ -119,19 +120,29 @@ Do this once. After that, visiting a Leiden login page will complete 2FA automat
 
    ![Settings](docs/screenshots/image4.jpg)
 
-2. A **6-digit code** will appear and refresh every 30 seconds.
+2. A **6-digit code** will appear and refresh every 30 seconds. **Copy this code**—you'll need it in the next step.
 
    ![TOTP code](docs/screenshots/image5.jpg)
 
-3. If Leiden still asks for a code to finish enrollment: in the Leiden tab, enter that 6-digit code and click **Next**.
+3. *(Optional)* Enable **Auto-fill credentials**, enter your Leiden username and password.
 
-4. Back in the extension, click **Save Settings**.
-
-5. *(Optional)* Enable **Auto-fill credentials**, enter your Leiden username and password, and save to auto-fill the login form.
+4. Click **Save Settings** (you'll complete Leiden enrollment next, then enable the extension).
 
 ---
 
-### Step 6 — Enable the extension
+### Step 6 — Complete Leiden enrollment
+
+1. Go back to the **Leiden Identity Manager** tab (from Step 4).
+
+2. Enter the **6-digit code** from the extension (from Step 5) into the verification field.
+
+3. Click **Next** (or **Verify**) to complete enrollment.
+
+4. Leiden enrollment is now complete. You can close this tab.
+
+---
+
+### Step 7 — Enable the extension
 
 The extension is **disabled** by default. Before testing:
 
@@ -142,7 +153,7 @@ The extension is **disabled** by default. Before testing:
 
 ---
 
-### Step 7 — You're done
+### Step 8 — You're done
 
 1. Go to a Leiden login page (e.g. [login.leidenuniv.nl](https://login.leidenuniv.nl/)).
 
