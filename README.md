@@ -161,48 +161,7 @@
      <img src="https://github.com/user-attachments/assets/eca116b7-c9b8-4953-8942-58340ef0bfe7" alt="Save changes" width="600" />
    </p>
 
----
-
-### Step 4 — Open extension settings
-
-> **Note:** If you already opened the settings in Step 2, you can skip this step.
-
-If you need to access the extension settings:
-
-1. Find **Leiden MFA Auto-Pass** in the extensions menu or list.
-2. Click it, then click **Open Settings** (or **Extension options** from the management page).
-3. Navigate to the **TOTP configuration** section.
-
----
-
-### Step 5 — Configure the extension
-
-> **Note:** If you already configured the extension in Step 3, you can skip to Step 6.
-
-To configure the extension with your secret key:
-
-1. In the extension settings TOTP configuration section, paste your secret key (copied from Step 3) into the **TOTP Secret Key** field.
-2. Click **Next** to verify the configuration.
-3. Confirm that a 6-digit code appears and refreshes every 30 seconds.
-4. Click **Save Settings** at the bottom of the page to save your changes.
-
----
-
-### Step 6 — Complete Leiden enrollment
-
-1. Go back to the **Leiden Identity Manager** tab (from Step 3).
-
-2. Enter the **6-digit code** from the extension (displayed in the TOTP configuration section) into the verification field.
-
-3. Click **Next** (or **Verify**) to complete enrollment.
-
-4. Leiden enrollment is now complete. You can close this tab.
-
----
-
-### Step 7 — Enable the extension
-
-The extension is **disabled** by default. Before testing:
+8. The extension is **disabled** by default. Before testing:
 
 1. Click the **Leiden MFA Auto-Pass** icon (or open the extensions menu).
 2. Click **Enable**.
