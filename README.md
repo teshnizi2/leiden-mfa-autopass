@@ -53,52 +53,71 @@
 
 ### Step 1 — Download
 
-1. On this repo, click **Code** → **Download ZIP**.
+1. On this repository page, click **Code** → **Download ZIP**.
 
-   ![Download ZIP](docs/screenshots/image6.jpg)
+   <p align="center">
+     <img src="docs/screenshots/image6.jpg" alt="Download ZIP" width="600" />
+   </p>
 
 2. Unzip the file:
-   - **macOS:** Double-click the ZIP.
-   - **Windows:** Right-click → **Extract all** (or Unzip).
+   - **macOS:** Double-click the ZIP file.
+   - **Windows:** Right-click → **Extract all** (or use an unzip tool).
 
-   ![Unzip](docs/screenshots/image7.png)
+   <p align="center">
+     <img src="docs/screenshots/image7.png" alt="Unzip" width="600" />
+   </p>
 
 ---
 
 ### Step 2 — Install the extension
 
-1. Open **Manage extensions** (toolbar icon or your browser’s extensions page).
+1. Open **Manage extensions** (toolbar icon or your browser's extensions page).
 
-   ![Manage extensions](docs/screenshots/image8.jpg)
+   <p align="center">
+     <img src="docs/screenshots/image8.jpg" alt="Manage extensions" width="600" />
+   </p>
 
 2. Turn **Developer mode** on (toggle at the bottom).
 
-   ![Developer mode](docs/screenshots/image9.png)
+   <p align="center">
+     <img src="docs/screenshots/image9.png" alt="Developer mode" width="600" />
+   </p>
 
 3. Click **Load unpacked**.
 
-   ![Load unpacked](docs/screenshots/image10.jpg)
+   <p align="center">
+     <img src="docs/screenshots/image10.jpg" alt="Load unpacked" width="600" />
+   </p>
 
 4. Select the **`extension`** folder (the one containing `manifest.json`) and confirm.
 
-   ![Select extension folder](docs/screenshots/image11.jpg)
+   <p align="center">
+     <img src="docs/screenshots/image11.jpg" alt="Select extension folder" width="600" />
+   </p>
 
 5. **Leiden MFA Auto-Pass** should appear in your extensions list.
 
-   ![Added to extensions](docs/screenshots/image12.png)
+   <p align="center">
+     <img src="docs/screenshots/image12.png" alt="Added to extensions" width="600" />
+   </p>
 
 6. Find **Leiden MFA Auto-Pass** in the extensions menu or list.
 
-   ![Choose Leiden MFA Auto-Pass](docs/screenshots/image13.jpg)
+   <p align="center">
+     <img src="docs/screenshots/image13.jpg" alt="Choose Leiden MFA Auto-Pass" width="600" />
+   </p>
 
-7. Click it, then **Open Settings** (or **Extension options** from the management page).
+7. Click it, then click **Open Settings** (or **Extension options** from the management page).
 
-  ![tg_image_3741009253](https://github.com/user-attachments/assets/de28d16a-2f21-4dba-987d-6a1e5c7a9ad8)
+   <p align="center">
+     <img src="https://github.com/user-attachments/assets/de28d16a-2f21-4dba-987d-6a1e5c7a9ad8" alt="Open Settings" width="600" />
+   </p>
 
-   
-8. find the TOTP configuration.
+8. Find the **TOTP configuration** section.
 
-<img width="808" height="983" alt="tg_image_2218435023" src="https://github.com/user-attachments/assets/5ae05d90-a7ee-465d-a2e4-bc5af8d5c476" />
+   <p align="center">
+     <img src="https://github.com/user-attachments/assets/5ae05d90-a7ee-465d-a2e4-bc5af8d5c476" alt="TOTP configuration" width="600" />
+   </p>
 
 ---
 
@@ -108,45 +127,64 @@
 
 2. Go to **Multi-Factor Authentication**.
 
-   ![Dashboard](docs/screenshots/image1.jpg)
+   <p align="center">
+     <img src="docs/screenshots/image1.jpg" alt="Dashboard" width="600" />
+   </p>
 
-3. pass the two step verification the any way that is possible for you:
+3. Complete the two-step verification using any method available to you:
 
-<img width="402" height="509" alt="telegram-cloud-document-4-5794089205051169220" src="https://github.com/user-attachments/assets/6891209c-4983-4e56-81f2-f7e092a5ad4c" />
-
+   <p align="center">
+     <img src="https://github.com/user-attachments/assets/6891209c-4983-4e56-81f2-f7e092a5ad4c" alt="Two-step verification" width="400" />
+   </p>
 
 4. Under **TOTP Non-NetIQ Authenticator**, click **Enroll** (first time) or **Modify** (if already set up).
 
-   ![Select authenticator](docs/screenshots/image2.jpg)
+   <p align="center">
+     <img src="docs/screenshots/image2.jpg" alt="Select authenticator" width="600" />
+   </p>
 
-5. **Copy the secret key** (long alphanumeric string). and paste it in the TOTP configuration in the extention setting. and click next after that.
+5. **Copy the secret key** (long alphanumeric string), then paste it into the TOTP configuration in the extension settings and click **Next**.
 
-  ![telegram-cloud-document-4-5794089205051169201](https://github.com/user-attachments/assets/272f73fb-f101-4386-a814-193f7fe2ed5a)
+   <p align="center">
+     <img src="https://github.com/user-attachments/assets/272f73fb-f101-4386-a814-193f7fe2ed5a" alt="Paste secret key" width="600" />
+   </p>
 
+6. Paste the code that appears in the TOTP section and click **Next**:
 
-6. paste the code that you can see in the TOTP section and click next:
-![telegram-cloud-document-4-5794089205051169202](https://github.com/user-attachments/assets/24ea4fd5-753a-4e53-9c8b-8b7315cc1a18)
+   <p align="center">
+     <img src="https://github.com/user-attachments/assets/24ea4fd5-753a-4e53-9c8b-8b7315cc1a18" alt="Enter TOTP code" width="600" />
+   </p>
 
-7. in the end of the setting page of extiontion save the changes:
+7. At the end of the extension settings page, **save the changes**:
 
-![telegram-cloud-document-4-5794089205051169213](https://github.com/user-attachments/assets/eca116b7-c9b8-4953-8942-58340ef0bfe7)
+   <p align="center">
+     <img src="https://github.com/user-attachments/assets/eca116b7-c9b8-4953-8942-58340ef0bfe7" alt="Save changes" width="600" />
+   </p>
 
+---
 
+### Step 4 — Open extension settings
+
+> **Note:** If you already opened the settings in Step 2, you can skip this step.
+
+If you need to access the extension settings:
+
+1. Find **Leiden MFA Auto-Pass** in the extensions menu or list.
+2. Click it, then click **Open Settings** (or **Extension options** from the management page).
+3. Navigate to the **TOTP configuration** section.
 
 ---
 
 ### Step 5 — Configure the extension
 
+> **Note:** If you already configured the extension in Step 3, you can skip to Step 6.
 
+To configure the extension with your secret key:
 
-2. A **6-digit code** will appear and refresh every 30 seconds.
-   > Copy this code—you'll need it in the next step.
-
-   ![TOTP code](docs/screenshots/image5.jpg)
-
-3. *(Optional)* Enable **Auto-fill credentials**, enter your Leiden username and password.
-
-4. Click **Save Settings**.
+1. In the extension settings TOTP configuration section, paste your secret key (copied from Step 3) into the **TOTP Secret Key** field.
+2. Click **Next** to verify the configuration.
+3. Confirm that a 6-digit code appears and refreshes every 30 seconds.
+4. Click **Save Settings** at the bottom of the page to save your changes.
 
 ---
 
@@ -154,7 +192,7 @@
 
 1. Go back to the **Leiden Identity Manager** tab (from Step 3).
 
-2. Enter the **6-digit code** from the extension (from Step 5) into the verification field.
+2. Enter the **6-digit code** from the extension (displayed in the TOTP configuration section) into the verification field.
 
 3. Click **Next** (or **Verify**) to complete enrollment.
 
@@ -169,17 +207,19 @@ The extension is **disabled** by default. Before testing:
 1. Click the **Leiden MFA Auto-Pass** icon (or open the extensions menu).
 2. Click **Enable**.
 
-   ![Enable the extension](docs/screenshots/image15.jpg)
+   <p align="center">
+     <img src="docs/screenshots/image15.jpg" alt="Enable the extension" width="600" />
+   </p>
 
 ---
 
 ### Step 8 — You're done 🎉
 
-1. Go to a Leiden login page (e.g. [login.leidenuniv.nl](https://login.leidenuniv.nl/)).
+1. Go to a Leiden login page (e.g., [login.leidenuniv.nl](https://login.leidenuniv.nl/)).
 
-2. Sign in with your username and password (or let the extension fill them if you enabled that).
+2. Sign in with your username and password (or let the extension fill them if you enabled that feature).
 
-3. The extension will select "Code from non-NetIQ Authenticator", enter the code, and submit. You should be logged in without typing a code.
+3. The extension will automatically select "Code from non-NetIQ Authenticator", enter the code, and submit it. You should be logged in without typing a code manually.
 
 ---
 
@@ -192,4 +232,4 @@ The extension is **disabled** by default. Before testing:
 
 ## 📄 License
 
-MIT. Not affiliated with Leiden University. Use at your own risk; keep a backup 2FA method (e.g. your phone app).
+MIT. Not affiliated with Leiden University. Use at your own risk; keep a backup 2FA method (e.g., your phone app).
