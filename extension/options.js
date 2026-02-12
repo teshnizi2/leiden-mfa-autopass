@@ -170,14 +170,88 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleCredentialsFields();
   });
   
+  // Debounce function for auto-save
+  let autoSaveTimeout = null;
+  
+  function autoSaveSecretKey(secret) {
+    // Clear existing timeout
+    if (autoSaveTimeout) {
+      clearTimeout(autoSaveTimeout);
+    }
+    
+    // Set new timeout to save after user stops typing (1.5 seconds)
+    autoSaveTimeout = setTimeout(() => {
+      if (secret && secret.trim().length >= 16) {
+        // Extract secret from otpauth URL if provided
+        let finalSecret = secret.trim();
+        if (finalSecret.includes('otpauth://') || finalSecret.includes('secret=')) {
+          try {
+            const url = new URL(finalSecret);
+            finalSecret = url.searchParams.get('secret') || finalSecret;
+          } catch (e) {
+            const match = finalSecret.match(/secret=([A-Z2-7=]+)/i);
+            if (match) finalSecret = match[1];
+          }
+        }
+        
+        // Get current preferences and update only the secret key
+        chrome.storage.sync.get(['enabled', 'autoAdvance', 'autoFillCode', 'autoFillCredentials', 'username', 'password'], (result) => {
+          const preferences = {
+            enabled: result.enabled !== undefined ? result.enabled : false,
+            autoAdvance: result.autoAdvance !== undefined ? result.autoAdvance : true,
+            autoFillCode: result.autoFillCode !== undefined ? result.autoFillCode : true,
+            autoFillCredentials: result.autoFillCredentials !== undefined ? result.autoFillCredentials : false,
+            totpSecret: finalSecret
+          };
+          
+          // Preserve credentials if auto-fill is enabled
+          if (preferences.autoFillCredentials) {
+            if (result.username) preferences.username = result.username;
+            if (result.password) preferences.password = result.password;
+          } else {
+            preferences.username = '';
+            preferences.password = '';
+          }
+          
+          // Save preferences
+          chrome.storage.sync.set(preferences, () => {
+            showStatus('Secret key saved automatically!', 'success');
+            
+            // Notify content scripts to reload preferences
+            chrome.tabs.query({ url: 'https://mfa.services.universiteitleiden.nl/*' }, (tabs) => {
+              tabs.forEach(tab => {
+                chrome.tabs.reload(tab.id);
+              });
+            });
+          });
+        });
+      }
+    }, 1500); // Wait 1.5 seconds after user stops typing
+  }
+  
   // Update TOTP display when secret key changes
   document.getElementById('totpSecret').addEventListener('input', (e) => {
     const secret = e.target.value.trim();
     if (secret.length >= 16) {
       updateTOTPDisplay(secret);
+      // Auto-save the secret key
+      autoSaveSecretKey(e.target.value);
     } else {
       document.getElementById('totpCodeDisplay').style.display = 'none';
     }
+  });
+  
+  // Also handle paste events for immediate auto-save
+  document.getElementById('totpSecret').addEventListener('paste', (e) => {
+    // Wait for paste to complete
+    setTimeout(() => {
+      const secret = e.target.value.trim();
+      if (secret.length >= 16) {
+        updateTOTPDisplay(secret);
+        // Auto-save immediately after paste
+        autoSaveSecretKey(e.target.value);
+      }
+    }, 100);
   });
 
   // Handle form submission
