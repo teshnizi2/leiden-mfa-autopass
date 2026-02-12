@@ -139,6 +139,9 @@ document.addEventListener('DOMContentLoaded', () => {
   autoFillCredentialsCheckbox.addEventListener('change', toggleCredentialsFields);
   toggleCredentialsFields(); // Initial call
   
+  // Store the last valid secret key
+  let lastValidSecret = null;
+  
   // Load saved preferences
   chrome.storage.sync.get(['enabled', 'autoAdvance', 'autoFillCode', 'autoFillCredentials', 'username', 'password', 'totpSecret', 'secretDetected'], (result) => {
     if (result.enabled !== undefined) {
@@ -163,6 +166,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (result.totpSecret) {
       document.getElementById('totpSecret').value = result.totpSecret;
+      // Store as last valid secret
+      lastValidSecret = result.totpSecret;
       // Show live TOTP code
       updateTOTPDisplay(result.totpSecret);
     }
@@ -173,14 +178,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // Debounce function for auto-save
   let autoSaveTimeout = null;
   
-  function autoSaveSecretKey(secret) {
-    // Clear existing timeout
-    if (autoSaveTimeout) {
+  function saveSecretKey(secret, immediate = false) {
+    // Clear existing timeout if saving immediately
+    if (immediate && autoSaveTimeout) {
       clearTimeout(autoSaveTimeout);
+      autoSaveTimeout = null;
     }
     
-    // Set new timeout to save after user stops typing (1.5 seconds)
-    autoSaveTimeout = setTimeout(() => {
+    const saveAction = () => {
       if (secret && secret.trim().length >= 16) {
         // Extract secret from otpauth URL if provided
         let finalSecret = secret.trim();
@@ -193,6 +198,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (match) finalSecret = match[1];
           }
         }
+        
+        // Store as last valid secret
+        lastValidSecret = finalSecret;
         
         // Get current preferences and update only the secret key
         chrome.storage.sync.get(['enabled', 'autoAdvance', 'autoFillCode', 'autoFillCredentials', 'username', 'password'], (result) => {
@@ -226,32 +234,61 @@ document.addEventListener('DOMContentLoaded', () => {
           });
         });
       }
-    }, 1500); // Wait 1.5 seconds after user stops typing
+    };
+    
+    if (immediate) {
+      saveAction();
+    } else {
+      // Clear existing timeout
+      if (autoSaveTimeout) {
+        clearTimeout(autoSaveTimeout);
+      }
+      // Set new timeout to save after user stops typing (1.5 seconds)
+      autoSaveTimeout = setTimeout(saveAction, 1500);
+    }
   }
   
+  const totpSecretInput = document.getElementById('totpSecret');
+  
   // Update TOTP display when secret key changes
-  document.getElementById('totpSecret').addEventListener('input', (e) => {
+  totpSecretInput.addEventListener('input', (e) => {
     const secret = e.target.value.trim();
     if (secret.length >= 16) {
       updateTOTPDisplay(secret);
-      // Auto-save the secret key
-      autoSaveSecretKey(e.target.value);
+      // Auto-save the secret key (debounced)
+      saveSecretKey(e.target.value, false);
     } else {
       document.getElementById('totpCodeDisplay').style.display = 'none';
     }
   });
   
-  // Also handle paste events for immediate auto-save
-  document.getElementById('totpSecret').addEventListener('paste', (e) => {
+  // Handle paste events
+  totpSecretInput.addEventListener('paste', (e) => {
     // Wait for paste to complete
     setTimeout(() => {
       const secret = e.target.value.trim();
       if (secret.length >= 16) {
         updateTOTPDisplay(secret);
         // Auto-save immediately after paste
-        autoSaveSecretKey(e.target.value);
+        saveSecretKey(e.target.value, true);
       }
     }, 100);
+  });
+  
+  // Handle blur event - save immediately when user clicks away
+  totpSecretInput.addEventListener('blur', (e) => {
+    const secret = e.target.value.trim();
+    
+    // If field is empty or invalid, restore last valid secret
+    if (!secret || secret.length < 16) {
+      if (lastValidSecret) {
+        e.target.value = lastValidSecret;
+        updateTOTPDisplay(lastValidSecret);
+      }
+    } else {
+      // Save immediately when user clicks away
+      saveSecretKey(e.target.value, true);
+    }
   });
 
   // Handle form submission
