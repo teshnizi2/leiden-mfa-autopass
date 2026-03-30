@@ -143,36 +143,41 @@ document.addEventListener('DOMContentLoaded', () => {
   let lastValidSecret = null;
   
   // Load saved preferences
-  chrome.storage.sync.get(['enabled', 'autoAdvance', 'autoFillCode', 'autoFillCredentials', 'username', 'password', 'totpSecret', 'secretDetected'], (result) => {
-    if (result.enabled !== undefined) {
-      document.getElementById('enabled').checked = result.enabled;
-    } else {
-      document.getElementById('enabled').checked = false;
-    }
-    if (result.autoAdvance !== undefined) {
-      document.getElementById('autoAdvance').checked = result.autoAdvance;
-    }
-    if (result.autoFillCode !== undefined) {
-      document.getElementById('autoFillCode').checked = result.autoFillCode;
-    }
-    if (result.autoFillCredentials !== undefined) {
-      document.getElementById('autoFillCredentials').checked = result.autoFillCredentials;
-    }
-    if (result.username) {
-      document.getElementById('username').value = result.username;
-    }
-    if (result.password) {
-      document.getElementById('password').value = result.password;
-    }
-    if (result.totpSecret) {
-      document.getElementById('totpSecret').value = result.totpSecret;
-      // Store as last valid secret
-      lastValidSecret = result.totpSecret;
-      // Show live TOTP code
-      updateTOTPDisplay(result.totpSecret);
-    }
-    
-    toggleCredentialsFields();
+  // Settings (non-sensitive) are in sync; credentials/secret are in local
+  chrome.storage.sync.get(['enabled', 'autoAdvance', 'autoFillCode', 'autoFillCredentials'], (syncResult) => {
+    chrome.storage.local.get(['username', 'password', 'totpSecret'], (localResult) => {
+      const result = { ...syncResult, ...localResult };
+
+      if (result.enabled !== undefined) {
+        document.getElementById('enabled').checked = result.enabled;
+      } else {
+        document.getElementById('enabled').checked = false;
+      }
+      if (result.autoAdvance !== undefined) {
+        document.getElementById('autoAdvance').checked = result.autoAdvance;
+      }
+      if (result.autoFillCode !== undefined) {
+        document.getElementById('autoFillCode').checked = result.autoFillCode;
+      }
+      if (result.autoFillCredentials !== undefined) {
+        document.getElementById('autoFillCredentials').checked = result.autoFillCredentials;
+      }
+      if (result.username) {
+        document.getElementById('username').value = result.username;
+      }
+      if (result.password) {
+        document.getElementById('password').value = result.password;
+      }
+      if (result.totpSecret) {
+        document.getElementById('totpSecret').value = result.totpSecret;
+        // Store as last valid secret
+        lastValidSecret = result.totpSecret;
+        // Show live TOTP code
+        updateTOTPDisplay(result.totpSecret);
+      }
+
+      toggleCredentialsFields();
+    });
   });
   
   // Helper function to extract secret from input
@@ -196,38 +201,18 @@ document.addEventListener('DOMContentLoaded', () => {
   function saveSecretKey(secret) {
     const finalSecret = extractSecretFromInput(secret);
     if (!finalSecret) return;
-    
+
     // Store as last valid secret
     lastValidSecret = finalSecret;
-    
-    // Get current preferences and update only the secret key
-    chrome.storage.sync.get(['enabled', 'autoAdvance', 'autoFillCode', 'autoFillCredentials', 'username', 'password'], (result) => {
-      const preferences = {
-        enabled: result.enabled !== undefined ? result.enabled : false,
-        autoAdvance: result.autoAdvance !== undefined ? result.autoAdvance : true,
-        autoFillCode: result.autoFillCode !== undefined ? result.autoFillCode : true,
-        autoFillCredentials: result.autoFillCredentials !== undefined ? result.autoFillCredentials : false,
-        totpSecret: finalSecret
-      };
-      
-      // Preserve credentials if auto-fill is enabled
-      if (preferences.autoFillCredentials) {
-        if (result.username) preferences.username = result.username;
-        if (result.password) preferences.password = result.password;
-      } else {
-        preferences.username = '';
-        preferences.password = '';
-      }
-      
-      // Save preferences
-      chrome.storage.sync.set(preferences, () => {
-        showStatus('Secret key saved automatically!', 'success');
-        
-        // Notify content scripts to reload preferences
-        chrome.tabs.query({ url: 'https://mfa.services.universiteitleiden.nl/*' }, (tabs) => {
-          tabs.forEach(tab => {
-            chrome.tabs.reload(tab.id);
-          });
+
+    // Save only the secret to local storage (sensitive — must not sync to Google)
+    chrome.storage.local.set({ totpSecret: finalSecret }, () => {
+      showStatus('Secret key saved automatically!', 'success');
+
+      // Notify content scripts to reload preferences
+      chrome.tabs.query({ url: 'https://mfa.services.universiteitleiden.nl/*' }, (tabs) => {
+        tabs.forEach(tab => {
+          chrome.tabs.reload(tab.id);
         });
       });
     });
@@ -274,30 +259,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (secret && secret.trim().length >= 16) {
       const finalSecret = extractSecretFromInput(secret);
       if (finalSecret) {
-        // Store as last valid secret
         lastValidSecret = finalSecret;
-        
-        // Get current preferences and update only the secret key
-        chrome.storage.sync.get(['enabled', 'autoAdvance', 'autoFillCode', 'autoFillCredentials', 'username', 'password'], (result) => {
-          const preferences = {
-            enabled: result.enabled !== undefined ? result.enabled : false,
-            autoAdvance: result.autoAdvance !== undefined ? result.autoAdvance : true,
-            autoFillCode: result.autoFillCode !== undefined ? result.autoFillCode : true,
-            autoFillCredentials: result.autoFillCredentials !== undefined ? result.autoFillCredentials : false,
-            totpSecret: finalSecret
-          };
-          
-          if (preferences.autoFillCredentials) {
-            if (result.username) preferences.username = result.username;
-            if (result.password) preferences.password = result.password;
-          } else {
-            preferences.username = '';
-            preferences.password = '';
-          }
-          
-          // Save synchronously (beforeunload doesn't wait for async)
-          chrome.storage.sync.set(preferences);
-        });
+        // Save to local storage (sensitive — must not sync to Google)
+        chrome.storage.local.set({ totpSecret: finalSecret });
       }
     }
   });
@@ -346,8 +310,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       preferences.totpSecret = finalSecret;
     } else {
-      // Check if secret was already auto-detected
-      chrome.storage.sync.get(['totpSecret'], (result) => {
+      // Check if secret was already saved
+      chrome.storage.local.get(['totpSecret'], (result) => {
         if (result.totpSecret) {
           // Keep existing secret
           preferences.totpSecret = result.totpSecret;
@@ -364,13 +328,22 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function savePreferences(preferences) {
-    chrome.storage.sync.set(preferences, () => {
-      showStatus('Settings saved successfully!', 'success');
-      
-      // Notify content scripts to reload preferences
-      chrome.tabs.query({ url: 'https://mfa.services.universiteitleiden.nl/*' }, (tabs) => {
-        tabs.forEach(tab => {
-          chrome.tabs.reload(tab.id);
+    // Split sensitive fields (local) from settings (sync)
+    const { totpSecret, username, password, ...syncPrefs } = preferences;
+    const localPrefs = {};
+    if (totpSecret !== undefined) localPrefs.totpSecret = totpSecret;
+    if (username !== undefined) localPrefs.username = username;
+    if (password !== undefined) localPrefs.password = password;
+
+    chrome.storage.sync.set(syncPrefs, () => {
+      chrome.storage.local.set(localPrefs, () => {
+        showStatus('Settings saved successfully!', 'success');
+
+        // Notify content scripts to reload preferences
+        chrome.tabs.query({ url: 'https://mfa.services.universiteitleiden.nl/*' }, (tabs) => {
+          tabs.forEach(tab => {
+            chrome.tabs.reload(tab.id);
+          });
         });
       });
     });
