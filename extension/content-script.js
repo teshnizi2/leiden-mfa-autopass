@@ -21,27 +21,29 @@
   };
 
   // Load preferences from storage
-  chrome.storage.sync.get(['enabled', 'autoAdvance', 'autoFillCode', 'autoFillCredentials', 'username', 'password', 'totpSecret'], (result) => {
-    if (result.enabled !== undefined) config.enabled = result.enabled;
-    if (result.autoAdvance !== undefined) config.autoAdvance = result.autoAdvance;
-    if (result.autoFillCode !== undefined) config.autoFillCode = result.autoFillCode;
-    if (result.autoFillCredentials !== undefined) config.autoFillCredentials = result.autoFillCredentials;
-    if (result.username) config.username = result.username;
-    if (result.password) config.password = result.password;
-    
-    if (!config.enabled) {
-      console.log('[Leiden MFA Auto-Pass] Extension is disabled in settings');
-      return;
-    }
+  // Settings (non-sensitive) are in sync; credentials are in local
+  chrome.storage.sync.get(['enabled', 'autoAdvance', 'autoFillCode', 'autoFillCredentials'], (syncResult) => {
+    chrome.storage.local.get(['username', 'password'], (localResult) => {
+      if (syncResult.enabled !== undefined) config.enabled = syncResult.enabled;
+      if (syncResult.autoAdvance !== undefined) config.autoAdvance = syncResult.autoAdvance;
+      if (syncResult.autoFillCode !== undefined) config.autoFillCode = syncResult.autoFillCode;
+      if (syncResult.autoFillCredentials !== undefined) config.autoFillCredentials = syncResult.autoFillCredentials;
+      if (localResult.username) config.username = localResult.username;
+      if (localResult.password) config.password = localResult.password;
+      if (!config.enabled) {
+        console.log('[Leiden MFA Auto-Pass] Extension is disabled in settings');
+        return;
+      }
 
-    console.log('[Leiden MFA Auto-Pass] Extension loaded');
-    
-    // Wait for DOM to be ready
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => handlePageOnce());
-    } else {
-      handlePageOnce();
-    }
+      console.log('[Leiden MFA Auto-Pass] Extension loaded');
+
+      // Wait for DOM to be ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => handlePageOnce());
+      } else {
+        handlePageOnce();
+      }
+    });
   });
 
   function handlePageOnce() {
